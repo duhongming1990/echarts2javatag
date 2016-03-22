@@ -10,12 +10,6 @@ import javax.servlet.jsp.tagext.BodyTag;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 import javax.servlet.jsp.tagext.Tag;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-
 import org.junit.Test;
 
 import com.github.abel533.echarts.axis.CategoryAxis;
@@ -29,11 +23,7 @@ import com.github.abel533.echarts.code.Trigger;
 import com.github.abel533.echarts.feature.MagicType;
 import com.github.abel533.echarts.json.GsonOption;
 import com.github.abel533.echarts.series.Line;
-@Data
-@EqualsAndHashCode(callSuper=false)
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
+
 public class EChartsBigLineTag extends BodyTagSupport{
 	private static final long serialVersionUID = 1L;
 	private Map<String,List<Double>> ylist;
@@ -239,4 +229,61 @@ public class EChartsBigLineTag extends BodyTagSupport{
 		 option.series(line1);
 		 option.series(line2);
 	 }
+
+	public Map<String, List<Double>> getYlist() {
+		return ylist;
+	}
+
+	public void setYlist(Map<String, List<Double>> ylist) {
+		this.ylist = ylist;
+	}
+
+	public List<String> getXlist() {
+		return xlist;
+	}
+
+	public void setXlist(List<String> xlist) {
+		this.xlist = xlist;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getSubtitle() {
+		return subtitle;
+	}
+
+	public void setSubtitle(String subtitle) {
+		this.subtitle = subtitle;
+	}
+
+	public String getYunitname() {
+		return yunitname;
+	}
+
+	public void setYunitname(String yunitname) {
+		this.yunitname = yunitname;
+	}
+
+	public String getXunitname() {
+		return xunitname;
+	}
+
+	public void setXunitname(String xunitname) {
+		this.xunitname = xunitname;
+	}
+
+	public Map<String, Integer> getYloction() {
+		return yloction;
+	}
+
+	public void setYloction(Map<String, Integer> yloction) {
+		this.yloction = yloction;
+	}
+	
 }  

@@ -94,4 +94,31 @@
 			<type>java.lang.Object</type>
 		</attribute>
 	</tag>
+		<tag>
+		<name>radar</name>
+		<tag-class>com.hrhx.tag.EChartsRadarTag</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<name>legendList</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<name>title</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>subtitle</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>typeNum</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Object</type>
+		</attribute>
+	</tag>
 </taglib>

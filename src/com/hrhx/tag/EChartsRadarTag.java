@@ -1,6 +1,8 @@
 package com.hrhx.tag;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTag;
@@ -8,16 +10,22 @@ import javax.servlet.jsp.tagext.BodyTagSupport;
 import javax.servlet.jsp.tagext.Tag;
 
 import com.github.abel533.echarts.Polar;
+import com.github.abel533.echarts.code.Orient;
+import com.github.abel533.echarts.code.SeriesType;
+import com.github.abel533.echarts.code.Tool;
 import com.github.abel533.echarts.code.Trigger;
+import com.github.abel533.echarts.code.X;
+import com.github.abel533.echarts.code.Y;
 import com.github.abel533.echarts.data.Data;
 import com.github.abel533.echarts.json.GsonOption;
+import com.github.abel533.echarts.series.Line;
 
 public class EChartsRadarTag extends BodyTagSupport{
 	private static final long serialVersionUID = 1L;
 	private String title;
 	private String subtitle;
 	private Integer typeNum;
-	private Double[] dataArr;
+	private List<Map<String,Object>> legendList;
 	@Override
 	public int doStartTag() throws JspException {
 		// TODO Auto-generated method stub
@@ -58,6 +66,15 @@ public class EChartsRadarTag extends BodyTagSupport{
                }
             ]
 		  */
+		//工具栏
+		 option.toolbox().show(true).feature(
+			 //Tool.mark,
+			 //Tool.dataView,
+			 Tool.saveAsImage
+			 //new MagicType(Magic.line, Magic.bar,Magic.stack,Magic.tiled),
+			 //Tool.dataZoom,
+			 //Tool.restore
+		 );
 		 Polar polar= new Polar();
 		 if(typeNum==8){ 
 				 polar.indicator(new Data().text("正北（N）").max(100))
@@ -102,24 +119,17 @@ public class EChartsRadarTag extends BodyTagSupport{
 				]
             },
 		  */
-//		 if(legendList!=null){
-//			 for(SettingTower settingTower:legendList){
-//				 option.legend().orient(Orient.horizontal).x(X.left).y(Y.bottom).data(settingTower.getTower_mater()+"米风向");
-//				 Line line = new Line();
-//				 Data data=new Data().name(settingTower.getTower_mater()+"米风向频率（%）");
-//				 data.value(settingTower.getDataArr());
-//				 line.name(settingTower.getTower_mater()+"米风向").type(SeriesType.radar).data(data);
-//				 option.series(line);
-//			 }
-//		 }else{
-//			 option.legend().orient(Orient.horizontal).x(X.left).y(Y.bottom).data("预测风向");
-//			 Line line = new Line();
-//			 Data data=new Data().name("预测风向频率（%）");
-//			 data.value(dataArr);
-//			 line.name("预测风向").type(SeriesType.radar).data(data);
-//			 option.series(line);
-//		 }
-		 
+		 if(legendList!=null){
+			 for(Map<String,Object> legendMap:legendList){
+				 option.legend().orient(Orient.horizontal).x(X.left).y(Y.bottom).data(legendMap.get("title").toString());
+				 Line line = new Line();
+				 Data data=new Data().name("预测风向频率（%）");
+				 Object[] dataArr = (Double[])legendMap.get("dataArr");
+				 data.value(dataArr);
+				 line.name(legendMap.get("title").toString()).type(SeriesType.radar).data(data);
+				 option.series(line);
+			 }
+		 }
 		 try {
 			this.pageContext.getOut().write(option.toString());
 		
@@ -128,8 +138,7 @@ public class EChartsRadarTag extends BodyTagSupport{
 			e.printStackTrace();
 		}
 		return Tag.EVAL_PAGE;//继续处理页面
-	}
-
+	}	
 	public String getTitle() {
 		return title;
 	}
@@ -154,13 +163,12 @@ public class EChartsRadarTag extends BodyTagSupport{
 		this.typeNum = typeNum;
 	}
 
-	public Double[] getDataArr() {
-		return dataArr;
+	public List<Map<String, Object>> getLegendList() {
+		return legendList;
 	}
 
-	public void setDataArr(Double[] dataArr) {
-		this.dataArr = dataArr;
+	public void setLegendList(List<Map<String, Object>> legendList) {
+		this.legendList = legendList;
 	}
-	
-	
+
 }  

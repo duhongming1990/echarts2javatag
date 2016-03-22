@@ -3,11 +3,6 @@
 **Maven:**
 ```xml
 <dependency>
-    <groupId>org.projectlombok</groupId>
-    <artifactId>lombok</artifactId>
-    <version>[1.16.8,)</version>
-</dependency>
-<dependency>
     <groupId>com.github.abel533</groupId>
     <artifactId>ECharts</artifactId>
     <version>2.2.7</version>
@@ -31,3 +26,13 @@
 	private List<String> xlist;
 	private Map<String,List<Double>> ylist;
 	private Map<String,Integer> yloction;
+	
+**玫瑰图Radar的Tag:**
+    <echarts:radar 
+		title="气象预测风向玫瑰图16方位" 
+		subtitle="预测时间"
+		legendList="${legendList}"
+		typeNum="16"
+		/>
+**玫瑰图Radar的数据格式:**		
+	private List<Map<String,Object>> legendList;

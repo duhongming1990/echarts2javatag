@@ -11,8 +11,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
+  <div>
 	<a href="LineDemo" target="_blank">Line</a><br/>
 	<img src="Line.png"/>
-	<img src="LineTag.png"/>
+	<img src="LineTag.png"/><br/>
+  </div>	
+  <div>
+	<a href="RadarDemo" target="_blank">Radar</a><br/>
+	<img src="Radar.png"/>
+	<img src="RadarTag.png"/><br/>
+  </div>	
   </body>
 </html>

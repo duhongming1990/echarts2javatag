@@ -18,8 +18,8 @@
 	    }
 	</style>
 	
-	<div id="line"  class="main000"></div>
-	
+	<div id="radar8"  class="main000"></div>
+	<div id="radar16"  class="main000"></div>
 	<!-- ECharts单文件引入 -->
 	<script src="<%=basePath%>/styles/echarts-2.2.7/build/dist/echarts.js"></script>
 	<script type="text/javascript">
@@ -30,20 +30,30 @@
 			} 
 		});
 		// 使用
-		require([ 'echarts', 'echarts/chart/line' // 使用折线图就加载bar模块，按需加载
+		require([ 'echarts', 'echarts/chart/radar' // 使用玫瑰图就加载radar模块，按需加载
 		], function(ec) {
 			// 基于准备好的dom，初始化echarts图表
-			var myChart = ec.init(document.getElementById('line'));
-			var option =
-			<echarts:line 
-				title="短期预测数据对比曲线" 
-				subtitle="短期预测数据对比曲线"
-				xlist="${xlist}" 
-				ylist="${ylist}" 
-				xunitname="预测时间"
-				yunitname="实际电量(MW),实际总辐射(w/㎡)" 
-				yloction="${yloction}"/>
+			var myChart = ec.init(document.getElementById('radar8'));
+			var option8 =
+			<echarts:radar 
+				title="气象预测风向玫瑰图8方位" 
+				subtitle="预测时间"
+				legendList="${legendList}"
+				typeNum="8"
+				/>
 			// 为echarts对象加载数据 
-			myChart.setOption(option);
+			myChart.setOption(option8);
+			
+			// 基于准备好的dom，初始化echarts图表
+			var myChart = ec.init(document.getElementById('radar16'));
+			var option16 =
+			<echarts:radar 
+				title="气象预测风向玫瑰图16方位" 
+				subtitle="预测时间"
+				legendList="${legendList}"
+				typeNum="16"
+				/>
+			// 为echarts对象加载数据 
+			myChart.setOption(option16);
 		});
 	</script>
