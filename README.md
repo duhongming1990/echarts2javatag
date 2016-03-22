@@ -47,4 +47,6 @@
 ```
 
 **玫瑰图Radar的数据格式:**		
+
 	private List<Map<String,Object>> legendList;
+	
