@@ -1,0 +1,5 @@
+#Tue Mar 22 10:48:33 CST 2016
+eclipse.preferences.version=1
+validator.Checked=WebRoot
+validator.Revalidate=false
+validator.Unchecked=WebRoot/META-INF,WebRoot/index.jsp,WebRoot/WEB-INF
