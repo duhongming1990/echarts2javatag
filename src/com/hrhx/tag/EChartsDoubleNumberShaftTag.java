@@ -48,7 +48,7 @@ public class EChartsDoubleNumberShaftTag extends BodyTagSupport{
 	
 	 @Override
 	public int doEndTag() throws JspException {		
-		 //´´½¨GsonOption¶ÔÏó£¬¼´Îªjson×Ö·û´®
+		 //åˆ›å»ºGsonOptionå¯¹è±¡ï¼Œå³ä¸ºjsonå­—ç¬¦ä¸²
 		 GsonOption option = new GsonOption();
 		 
 		 /**
@@ -60,8 +60,8 @@ public class EChartsDoubleNumberShaftTag extends BodyTagSupport{
 		 
 		 /**
 		  * title : {
-                'text':'2002È«¹úºê¹Û¾­¼Ã¹ØÁª·ÖÎö£¨GDP vs ·¿µØ²ú£©',
-                'subtext':'Êı¾İÀ´×Ô¹ú¼ÒÍ³¼Æ¾Ö'
+                'text':'2002å…¨å›½å®è§‚ç»æµå…³è”åˆ†æï¼ˆGDP vs æˆ¿åœ°äº§ï¼‰',
+                'subtext':'æ•°æ®æ¥è‡ªå›½å®¶ç»Ÿè®¡å±€'
             }
 		  */
 		 option.title(title, subtitle);
@@ -79,7 +79,7 @@ public class EChartsDoubleNumberShaftTag extends BodyTagSupport{
 		        }
 		    }
 		  */
-		 //¹¤¾ßÀ¸
+		 //å·¥å…·æ 
 		 option.toolbox().show(true).feature(
 			 Tool.mark,
 			 Tool.dataZoom,
@@ -96,7 +96,7 @@ public class EChartsDoubleNumberShaftTag extends BodyTagSupport{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return Tag.EVAL_PAGE;//¼ÌĞø´¦ÀíÒ³Ãæ
+		return Tag.EVAL_PAGE;//ç»§ç»­å¤„ç†é¡µé¢
 	}
 
 	@Test
@@ -120,18 +120,18 @@ public class EChartsDoubleNumberShaftTag extends BodyTagSupport{
 			        }
 			    ]
 		  */
-		 //XÖáÊı¾İÉèÖÃÀàĞÍ
+		 //Xè½´æ•°æ®è®¾ç½®ç±»å‹
 		 ValueAxis valueAxis = new ValueAxis();
 		 valueAxis.type(AxisType.value);
 		 
-		 option.legend().data("Êı¾İ1");
-		 option.legend().data("Êı¾İ2");
+		 option.legend().data("æ•°æ®1");
+		 option.legend().data("æ•°æ®2");
 		 
 		 Line line = new Line();
 		 int a[][]=new int [2][2];
 		 a[0][0]=1;
 		 a[0][1]=2;
-		 //line.name("Êı¾İ1").type(SeriesType.line).data(a);
+		 //line.name("æ•°æ®1").type(SeriesType.line).data(a);
 		 option.series(line);
 		 System.out.println(option.toPrettyString());
 		 

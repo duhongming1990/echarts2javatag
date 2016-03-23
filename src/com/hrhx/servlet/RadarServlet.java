@@ -1,5 +1,4 @@
 package com.hrhx.servlet;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,13 +34,13 @@ public class RadarServlet extends HttpServlet {
 		Double[] dataArr1 = new Double[]{0.1*100,0.2*100,0.3*100,0.1*100,0.05*100,0.05*100,0.1*100,0.1*100};
 		Map<String,Object> mapData1 = new HashMap<String,Object>();
 		mapData1.put("dataArr", dataArr1);
-		mapData1.put("title", "õ��ͼ1");
+		mapData1.put("title", "玫瑰图1");
 		legendList.add(mapData1);
 		
 		Double[] dataArr2 = new Double[]{0.05*100,0.05*100,0.1*100,0.1*100,0.1*100,0.2*100,0.3*100,0.1*100};
 		Map<String,Object> mapData2 = new HashMap<String,Object>();
 		mapData2.put("dataArr", dataArr2);
-		mapData2.put("title", "õ��ͼ2");
+		mapData2.put("title", "玫瑰图2");
 		legendList.add(mapData2);
 		
 		return legendList;

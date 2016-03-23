@@ -17,8 +17,9 @@
 	                box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
 	    }
 	</style>
-	
+	8方位：
 	<div id="radar8"  class="main000"></div>
+	16方位：
 	<div id="radar16"  class="main000"></div>
 	<!-- ECharts单文件引入 -->
 	<script src="<%=basePath%>/styles/echarts-2.2.7/build/dist/echarts.js"></script>

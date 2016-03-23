@@ -24,211 +24,156 @@ import com.github.abel533.echarts.feature.MagicType;
 import com.github.abel533.echarts.json.GsonOption;
 import com.github.abel533.echarts.series.Line;
 
-public class EChartsBigLineTag extends BodyTagSupport{
+public class EChartsBigLineTag extends BodyTagSupport {
 	private static final long serialVersionUID = 1L;
-	private Map<String,List<Double>> ylist;
+	private Map<String, List<Double>> ylist;
 	private List<String> xlist;
 	private String title;
 	private String subtitle;
 	private String yunitname;
 	private String xunitname;
-	private Map<String,Integer> yloction;
+	private Map<String, Integer> yloction;
+
 	@Override
 	public int doStartTag() throws JspException {
-		// TODO Auto-generated method stub
 		return BodyTag.EVAL_BODY_BUFFERED;
 	}
-	
+
 	@Override
-	public int doEndTag() throws JspException {		
-		 //´´½¨GsonOption¶ÔÏó£¬¼´Îªjson×Ö·û´®
-		 GsonOption option = new GsonOption();
-		 option.tooltip().trigger(Trigger.axis);
-		 option.title(title, subtitle);
-		 //¹¤¾ßÀ¸
-		 option.toolbox().show(true).feature(
-			 //Tool.mark,
-			 //Tool.dataView,
-			 Tool.saveAsImage,
-			 //new MagicType(Magic.line, Magic.bar,Magic.stack,Magic.tiled),
-			 Tool.dataZoom,
-			 Tool.restore
-		 );
-		 option.calculable(true);
-		 option.dataZoom().show(true).realtime(true).start(0).end(100);
-		 
-		 //XÖáÊı¾İ·â×°²¢½âÎö
-		 ValueAxis valueAxis = new ValueAxis();
-		 for(String s:xlist){
-			 valueAxis.type(AxisType.category).data(s);
-		 }
-		//XÖáµ¥Î»
-		 valueAxis.name(xunitname);
-		 option.xAxis(valueAxis);
-		 for (String key :ylist.keySet()) {
-			 option.legend().data(key);
-		 }
-		 //YÖáÊı¾İ·â×°²¢½âÎö
-		 String[] unitNameArray = yunitname.split(",");
-		 for(String s:unitNameArray){
-			 CategoryAxis categoryAxis = new CategoryAxis();
-			 categoryAxis.type(AxisType.value);
-			 option.yAxis(categoryAxis.name(s));
-		 }
-		 int i=0;
-		 for (String key :ylist.keySet()) {
-			//±éÀúlistµÃµ½Êı¾İ
-			 List<Double> list=ylist.get(key);
-			 Line line = new Line().name(key);
-			 for(Double d :list){
-				 //KWÓëMWµ¥Î»µÄ×ª»»
-//				 if(settingGlobal!=null&&settingGlobal.getIskw()==0){
-//					 d = d/1000;
-//				 }
-				 //Êı¾İÎª¿ÕµÄ»°»á±¨´í£¬Îª¿ÕÔòÎªÁã
-				 if(d!=null){
-					 line.type(SeriesType.line).data(d);
-				 }else{
-					 line.type(SeriesType.line).data(0);
-				 }
-				 
-				 if(yloction!=null&&yloction.get(key)!=null){
-					 line.type(SeriesType.line).yAxisIndex(yloction.get(key));
-					 line.symbol(Symbol.none);
-				 }else{
-					 line.type(SeriesType.line).yAxisIndex(0);
-					 line.symbol(Symbol.none);
-				 }
-				 
-			 }
-			 option.series(line);
-			 i++;
-		 }
-		 try {
-			this.pageContext.getOut().write(option.toString());
-		
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public int doEndTag() throws JspException {
+		// åˆ›å»ºGsonOptionå¯¹è±¡ï¼Œå³ä¸ºjsonå­—ç¬¦ä¸²
+		GsonOption option = new GsonOption();
+		option.tooltip().trigger(Trigger.axis);
+		option.title(title, subtitle);
+		// å·¥å…·æ 
+		option.toolbox().show(true).feature(
+		// Tool.mark,
+		// Tool.dataView,
+				Tool.saveAsImage,
+				// new MagicType(Magic.line, Magic.bar,Magic.stack,Magic.tiled),
+				Tool.dataZoom, Tool.restore);
+		option.calculable(true);
+		option.dataZoom().show(true).realtime(true).start(0).end(100);
+
+		// Xè½´æ•°æ®å°è£…å¹¶è§£æ
+		ValueAxis valueAxis = new ValueAxis();
+		for (String s : xlist) {
+			valueAxis.type(AxisType.category).data(s);
 		}
-		return Tag.EVAL_PAGE;//¼ÌĞø´¦ÀíÒ³Ãæ
+		// Xè½´å•ä½
+		valueAxis.name(xunitname);
+		option.xAxis(valueAxis);
+		for (String key : ylist.keySet()) {
+			option.legend().data(key);
+		}
+		// Yè½´æ•°æ®å°è£…å¹¶è§£æ
+		String[] unitNameArray = yunitname.split(",");
+		for (String s : unitNameArray) {
+			CategoryAxis categoryAxis = new CategoryAxis();
+			categoryAxis.type(AxisType.value);
+			option.yAxis(categoryAxis.name(s));
+		}
+		int i = 0;
+		for (String key : ylist.keySet()) {
+			// éå†listå¾—åˆ°æ•°æ®
+			List<Double> list = ylist.get(key);
+			Line line = new Line().name(key);
+			for (Double d : list) {
+				// KWä¸MWå•ä½çš„è½¬æ¢
+				// if(settingGlobal!=null&&settingGlobal.getIskw()==0){
+				// d = d/1000;
+				// }
+				// æ•°æ®ä¸ºç©ºçš„è¯ä¼šæŠ¥é”™ï¼Œä¸ºç©ºåˆ™ä¸ºé›¶
+				if (d != null) {
+					line.type(SeriesType.line).data(d);
+				} else {
+					line.type(SeriesType.line).data(0);
+				}
+
+				if (yloction != null && yloction.get(key) != null) {
+					line.type(SeriesType.line).yAxisIndex(yloction.get(key));
+					line.symbol(Symbol.none);
+				} else {
+					line.type(SeriesType.line).yAxisIndex(0);
+					line.symbol(Symbol.none);
+				}
+
+			}
+			option.series(line);
+			i++;
+		}
+		try {
+			this.pageContext.getOut().write(option.toString());
+
+		} catch (IOException e) {
+			System.err.print(e);
+		}
+		return Tag.EVAL_PAGE;// ç»§ç»­å¤„ç†é¡µé¢
 	}
 
 	@Test
-	public void test(){
-		 
-		 GsonOption option = new GsonOption();
-		 /**
-		   tooltip : {
-		        trigger: 'axis'
-		    }
+	public void test() {
+
+		GsonOption option = new GsonOption();
+		/**
+		 * tooltip : { trigger: 'axis' }
 		 */
-		 option.tooltip().trigger(Trigger.axis);
-		 /**
-		    legend: {
-		        data:['×î¸ß','×îµÍ']
-		    }
-		  */
-		 List<Object> legendDataList = new ArrayList<Object>();
-		 legendDataList.add("×î¸ß");
-		 legendDataList.add("×îµÍ");
-		 option.legend().data(legendDataList);
-		 /**
-		    toolbox: {
-		        show : true,
-		        feature : {
-		            mark : {show: true},
-		            dataZoom : {show: true},
-		            dataView : {show: true},
-		            magicType : {show: true, type: ['line', 'bar', 'stack', 'tiled']},
-		            restore : {show: true},
-		            saveAsImage : {show: true}
-		        }
-		    }
-		  */
-		 option.toolbox().show(true)
-		 				 .feature(
-		 						 Tool.mark,
-		 						 Tool.dataZoom,
-		 						 Tool.dataView,
-		 						 new MagicType(Magic.line, Magic.bar,Magic.stack,Magic.tiled),
-		 						 Tool.restore,
-		 						 Tool.saveAsImage);
-		 // calculable : true
-		 option.calculable(true);
-		 /**
-		   dataZoom : {
-		        show : true,
-		        realtime : true,
-		        start : 20,
-		        end : 80
-		    }
-		  */
-		 option.dataZoom().show(true)
-		 				  .realtime(true)
-		 				  .start(20)
-		 				  .end(80);
-		 /**
-		  * xAxis : [
-		        {
-		            type : 'category',
-		            boundaryGap : false,
-		            data : function (){
-		                var list = [];
-		                for (var i = 1; i <= 30; i++) {
-		                    list.push('2013-03-' + i);
-		                }
-		                return list;
-		            }()
-		        }
-		    ]
-		  */
-		 ValueAxis valueAxis = new ValueAxis();
-		 valueAxis.type(AxisType.category).data("2015-01-01","2015-02-02");
-		 option.xAxis(valueAxis);
-		 /**
-		  * yAxis : [
-		        {
-		            type : 'value'
-		        }
-		    ]
-		  */
-		 CategoryAxis categoryAxis = new CategoryAxis();
-		 categoryAxis.type(AxisType.value);
-		 option.yAxis(categoryAxis);
-		 /**
-		  * series : [
-		        {
-		            name:'×î¸ß',
-		            type:'line',
-		            data:function (){
-		                var list = [];
-		                for (var i = 1; i <= 30; i++) {
-		                    list.push(Math.round(Math.random()* 30));
-		                }
-		                return list;
-		            }()
-		        },
-		        {
-		            name:'×îµÍ',
-		            type:'line',
-		            data:function (){
-		                var list = [];
-		                for (var i = 1; i <= 30; i++) {
-		                    list.push(Math.round(Math.random()* 10));
-		                }
-		                return list;
-		            }()
-		        }
-		    ]
-		  */
-		 Line line1 = new Line();
-		 line1.name("×î¸ß").type(SeriesType.line).data(15, -50);
-		 Line line2 = new Line();
-		 line2.name("×îµÍ").type(SeriesType.line).data(150, -500);
-		 option.series(line1);
-		 option.series(line2);
-	 }
+		option.tooltip().trigger(Trigger.axis);
+		/**
+		 * legend: { data:['æœ€é«˜','æœ€ä½'] }
+		 */
+		List<Object> legendDataList = new ArrayList<Object>();
+		legendDataList.add("æœ€é«˜");
+		legendDataList.add("æœ€ä½");
+		option.legend().data(legendDataList);
+		/**
+		 * toolbox: { show : true, feature : { mark : {show: true}, dataZoom :
+		 * {show: true}, dataView : {show: true}, magicType : {show: true, type:
+		 * ['line', 'bar', 'stack', 'tiled']}, restore : {show: true},
+		 * saveAsImage : {show: true} } }
+		 */
+		option.toolbox()
+				.show(true)
+				.feature(
+						Tool.mark,
+						Tool.dataZoom,
+						Tool.dataView,
+						new MagicType(Magic.line, Magic.bar, Magic.stack,
+								Magic.tiled), Tool.restore, Tool.saveAsImage);
+		// calculable : true
+		option.calculable(true);
+		/**
+		 * dataZoom : { show : true, realtime : true, start : 20, end : 80 }
+		 */
+		option.dataZoom().show(true).realtime(true).start(20).end(80);
+		/**
+		 * xAxis : [ { type : 'category', boundaryGap : false, data : function
+		 * (){ var list = []; for (var i = 1; i <= 30; i++) {
+		 * list.push('2013-03-' + i); } return list; }() } ]
+		 */
+		ValueAxis valueAxis = new ValueAxis();
+		valueAxis.type(AxisType.category).data("2015-01-01", "2015-02-02");
+		option.xAxis(valueAxis);
+		/**
+		 * yAxis : [ { type : 'value' } ]
+		 */
+		CategoryAxis categoryAxis = new CategoryAxis();
+		categoryAxis.type(AxisType.value);
+		option.yAxis(categoryAxis);
+		/**
+		 * series : [ { name:'æœ€é«˜', type:'line', data:function (){ var list = [];
+		 * for (var i = 1; i <= 30; i++) { list.push(Math.round(Math.random()*
+		 * 30)); } return list; }() }, { name:'æœ€ä½', type:'line', data:function
+		 * (){ var list = []; for (var i = 1; i <= 30; i++) {
+		 * list.push(Math.round(Math.random()* 10)); } return list; }() } ]
+		 */
+		Line line1 = new Line();
+		line1.name("æœ€é«˜").type(SeriesType.line).data(15, -50);
+		Line line2 = new Line();
+		line2.name("æœ€ä½").type(SeriesType.line).data(150, -500);
+		option.series(line1);
+		option.series(line2);
+	}
 
 	public Map<String, List<Double>> getYlist() {
 		return ylist;
@@ -285,5 +230,5 @@ public class EChartsBigLineTag extends BodyTagSupport{
 	public void setYloction(Map<String, Integer> yloction) {
 		this.yloction = yloction;
 	}
-	
-}  
+
+}

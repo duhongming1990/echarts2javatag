@@ -1,5 +1,4 @@
 package com.hrhx.servlet;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,11 +27,11 @@ public class LineServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		//xÖáÊı¾İ
+		//xè½´æ•°æ®
 		request.setAttribute("xlist", getXList());
-		//yÖáÊı¾İ
+		//yè½´æ•°æ®
 		request.setAttribute("ylist", getYList());
-		//YÖáË«ÖáÇé¿öÏÂµÄÎ»ÖÃ¶¨Î»
+		//Yè½´åŒè½´æƒ…å†µä¸‹çš„ä½ç½®å®šä½
 		request.setAttribute("yloction", getYLoction());
 		
 		request.getRequestDispatcher("WEB-INF/views/line.jsp").forward(request, response);
@@ -58,7 +57,7 @@ public class LineServlet extends HttpServlet {
 		data1.add(random.nextDouble());
 		data1.add(random.nextDouble());
 		data1.add(random.nextDouble());
-		ylist.put("ÇúÏßÒ»", data1);
+		ylist.put("æ›²çº¿ä¸€", data1);
 		
 		List<Double> data2 = new ArrayList<Double>();
 		data2.add(random.nextDouble());
@@ -66,15 +65,15 @@ public class LineServlet extends HttpServlet {
 		data2.add(random.nextDouble());
 		data2.add(random.nextDouble());
 		data2.add(random.nextDouble());
-		ylist.put("ÇúÏß¶ş", data2);
+		ylist.put("æ›²çº¿äºŒ", data2);
 		
 		return ylist;
 	}
 	
 	public Map<String,Integer> getYLoction(){
 		yloction = new HashMap<String,Integer>();
-		yloction.put("ÇúÏßÒ»", 0);
-		yloction.put("ÇúÏß¶ş", 1);
+		yloction.put("æ›²çº¿ä¸€", 0);
+		yloction.put("æ›²çº¿äºŒ", 1);
 		return yloction;
 	}
 	

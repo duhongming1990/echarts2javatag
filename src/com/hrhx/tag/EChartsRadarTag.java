@@ -20,125 +20,104 @@ import com.github.abel533.echarts.data.Data;
 import com.github.abel533.echarts.json.GsonOption;
 import com.github.abel533.echarts.series.Line;
 
-public class EChartsRadarTag extends BodyTagSupport{
+public class EChartsRadarTag extends BodyTagSupport {
 	private static final long serialVersionUID = 1L;
 	private String title;
 	private String subtitle;
 	private Integer typeNum;
-	private List<Map<String,Object>> legendList;
+	private List<Map<String, Object>> legendList;
+
 	@Override
 	public int doStartTag() throws JspException {
-		// TODO Auto-generated method stub
 		return BodyTag.EVAL_BODY_BUFFERED;
 	}
-	
+
 	@Override
-	public int doEndTag() throws JspException {		
-		 // TODO Auto-generated method stub
-		 //´´½¨GsonOption¶ÔÏó£¬¼´Îªjson×Ö·û´®
-		 GsonOption option = new GsonOption();
-		 /**
-		  *  title: {
-                text: 'ÊµÊ±·çÏòÃµ¹åÍ¼',
-                subtext: 'Ô¤²âÊ±¼ä:'
-             },
-		  */
-		 option.title(title, subtitle);
-		 /**
-		  *  tooltip: {
-                trigger: 'axis'
-             },
-		  */
-		 option.tooltip().trigger(Trigger.axis);
-		 /**
-		  * polar: [
-               {
-                   indicator: [
-                       { text: 'Õı±±£¨N£©', max: 100 },
-                       { text: 'Î÷±±£¨NW£©', max: 100 },
-                       { text: 'ÕıÎ÷£¨W£©', max: 100 },
-                       { text: 'Î÷ÄÏ£¨SW£©', max: 100 },
-                       { text: 'ÕıÄÏ£¨S£©', max: 100 },
-                       { text: '¶«ÄÏ£¨SE£©', max: 100 },
-                       { text: 'Õı¶«£¨E£©', max: 100 },
-                       { text: '¶«±±£¨NE£©', max: 100 }
-                   ]
-               }
-            ]
-		  */
-		//¹¤¾ßÀ¸
-		 option.toolbox().show(true).feature(
-			 //Tool.mark,
-			 //Tool.dataView,
-			 Tool.saveAsImage
-			 //new MagicType(Magic.line, Magic.bar,Magic.stack,Magic.tiled),
-			 //Tool.dataZoom,
-			 //Tool.restore
-		 );
-		 Polar polar= new Polar();
-		 if(typeNum==8){ 
-				 polar.indicator(new Data().text("Õı±±£¨N£©").max(100))
-				 	  .indicator(new Data().text("Î÷±±£¨NW£©").max(100))
-				 	  .indicator(new Data().text("ÕıÎ÷£¨W£©").max(100))
-				 	  .indicator(new Data().text("Î÷ÄÏ£¨SW£©").max(100))
-				 	  .indicator(new Data().text("ÕıÄÏ£¨S£©").max(100))
-				 	  .indicator(new Data().text("¶«ÄÏ£¨SE£©").max(100))
-				 	  .indicator(new Data().text("Õı¶«£¨E£©").max(100))
-				 	  .indicator(new Data().text("¶«±±£¨NE)").max(100));
-				 
-		 }else if(typeNum==16){
-			 polar.indicator(new Data().text("Õı±±£¨N£©").max(100))
-			  	  .indicator(new Data().text("±±Î÷±±£¨NNW£©").max(100))
-			 	  .indicator(new Data().text("Î÷±±£¨NW£©").max(100))
-			 	  .indicator(new Data().text("Î÷±±Î÷£¨WNW£©").max(100))
-			 	  .indicator(new Data().text("ÕıÎ÷£¨W£©").max(100))
-			 	  .indicator(new Data().text("Î÷ÄÏÎ÷£¨WSW£©").max(100))
-			 	  .indicator(new Data().text("Î÷ÄÏ£¨SW£©").max(100))
-			 	  .indicator(new Data().text("ÄÏÎ÷ÄÏ£¨SSW£©").max(100))
-			 	  .indicator(new Data().text("ÕıÄÏ£¨S£©").max(100))
-			 	  .indicator(new Data().text("ÄÏ¶«ÄÏ£¨SSE£©").max(100))
-			 	  .indicator(new Data().text("¶«ÄÏ£¨SE£©").max(100))
-			 	  .indicator(new Data().text("¶«ÄÏ¶«£¨ESE£©").max(100))
-			 	  .indicator(new Data().text("Õı¶«£¨E£©").max(100))
-			 	  .indicator(new Data().text("¶«±±¶«£¨ENE£©").max(100))
-			 	  .indicator(new Data().text("¶«±±£¨NE)").max(100))
-			 	  .indicator(new Data().text("±±¶«±±£¨NNE£©").max(100));
-		 }
-		 option.polar(polar);
-		 option.calculable(true);
-		 
-		 /**
-		  *  legend: {
-                orient: 'horizontal',
-                x: 'left',
-                y: 'bottom',
-                data: [
-                <c:forEach var="item" items="${towerList}" varStatus="status">
-					'${item.tower_mater}Ã×·çÏò',
-				</c:forEach>
-				]
-            },
-		  */
-		 if(legendList!=null){
-			 for(Map<String,Object> legendMap:legendList){
-				 option.legend().orient(Orient.horizontal).x(X.left).y(Y.bottom).data(legendMap.get("title").toString());
-				 Line line = new Line();
-				 Data data=new Data().name("Ô¤²â·çÏòÆµÂÊ£¨%£©");
-				 Object[] dataArr = (Double[])legendMap.get("dataArr");
-				 data.value(dataArr);
-				 line.name(legendMap.get("title").toString()).type(SeriesType.radar).data(data);
-				 option.series(line);
-			 }
-		 }
-		 try {
-			this.pageContext.getOut().write(option.toString());
-		
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public int doEndTag() throws JspException {
+		// åˆ›å»ºGsonOptionå¯¹è±¡ï¼Œå³ä¸ºjsonå­—ç¬¦ä¸²
+		GsonOption option = new GsonOption();
+		/**
+		 * title: { text: 'å®æ—¶é£å‘ç«ç‘°å›¾', subtext: 'é¢„æµ‹æ—¶é—´:' },
+		 */
+		option.title(title, subtitle);
+		/**
+		 * tooltip: { trigger: 'axis' },
+		 */
+		option.tooltip().trigger(Trigger.axis);
+		/**
+		 * polar: [ { indicator: [ { text: 'æ­£åŒ—ï¼ˆNï¼‰', max: 100 }, { text:
+		 * 'è¥¿åŒ—ï¼ˆNWï¼‰', max: 100 }, { text: 'æ­£è¥¿ï¼ˆWï¼‰', max: 100 }, { text: 'è¥¿å—ï¼ˆSWï¼‰',
+		 * max: 100 }, { text: 'æ­£å—ï¼ˆSï¼‰', max: 100 }, { text: 'ä¸œå—ï¼ˆSEï¼‰', max: 100
+		 * }, { text: 'æ­£ä¸œï¼ˆEï¼‰', max: 100 }, { text: 'ä¸œåŒ—ï¼ˆNEï¼‰', max: 100 } ] } ]
+		 */
+		// å·¥å…·æ 
+		option.toolbox().show(true).feature(
+		// Tool.mark,
+		// Tool.dataView,
+				Tool.saveAsImage
+		// new MagicType(Magic.line, Magic.bar,Magic.stack,Magic.tiled),
+		// Tool.dataZoom,
+		// Tool.restore
+				);
+		Polar polar = new Polar();
+		if (typeNum == 8) {
+			polar.indicator(new Data().text("æ­£åŒ—ï¼ˆNï¼‰").max(100))
+					.indicator(new Data().text("è¥¿åŒ—ï¼ˆNWï¼‰").max(100))
+					.indicator(new Data().text("æ­£è¥¿ï¼ˆWï¼‰").max(100))
+					.indicator(new Data().text("è¥¿å—ï¼ˆSWï¼‰").max(100))
+					.indicator(new Data().text("æ­£å—ï¼ˆSï¼‰").max(100))
+					.indicator(new Data().text("ä¸œå—ï¼ˆSEï¼‰").max(100))
+					.indicator(new Data().text("æ­£ä¸œï¼ˆEï¼‰").max(100))
+					.indicator(new Data().text("ä¸œåŒ—ï¼ˆNE)").max(100));
+
+		} else if (typeNum == 16) {
+			polar.indicator(new Data().text("æ­£åŒ—ï¼ˆNï¼‰").max(100))
+					.indicator(new Data().text("åŒ—è¥¿åŒ—ï¼ˆNNWï¼‰").max(100))
+					.indicator(new Data().text("è¥¿åŒ—ï¼ˆNWï¼‰").max(100))
+					.indicator(new Data().text("è¥¿åŒ—è¥¿ï¼ˆWNWï¼‰").max(100))
+					.indicator(new Data().text("æ­£è¥¿ï¼ˆWï¼‰").max(100))
+					.indicator(new Data().text("è¥¿å—è¥¿ï¼ˆWSWï¼‰").max(100))
+					.indicator(new Data().text("è¥¿å—ï¼ˆSWï¼‰").max(100))
+					.indicator(new Data().text("å—è¥¿å—ï¼ˆSSWï¼‰").max(100))
+					.indicator(new Data().text("æ­£å—ï¼ˆSï¼‰").max(100))
+					.indicator(new Data().text("å—ä¸œå—ï¼ˆSSEï¼‰").max(100))
+					.indicator(new Data().text("ä¸œå—ï¼ˆSEï¼‰").max(100))
+					.indicator(new Data().text("ä¸œå—ä¸œï¼ˆESEï¼‰").max(100))
+					.indicator(new Data().text("æ­£ä¸œï¼ˆEï¼‰").max(100))
+					.indicator(new Data().text("ä¸œåŒ—ä¸œï¼ˆENEï¼‰").max(100))
+					.indicator(new Data().text("ä¸œåŒ—ï¼ˆNE)").max(100))
+					.indicator(new Data().text("åŒ—ä¸œåŒ—ï¼ˆNNEï¼‰").max(100));
 		}
-		return Tag.EVAL_PAGE;//¼ÌĞø´¦ÀíÒ³Ãæ
-	}	
+		option.polar(polar);
+		option.calculable(true);
+
+		/**
+		 * legend: { orient: 'horizontal', x: 'left', y: 'bottom', data: [
+		 * <c:forEach var="item" items="${towerList}" varStatus="status">
+		 * '${item.tower_mater}ç±³é£å‘', </c:forEach> ] },
+		 */
+		if (legendList != null) {
+			for (Map<String, Object> legendMap : legendList) {
+				String title = legendMap.get("title").toString();
+				option.legend().orient(Orient.horizontal).x(X.left).y(Y.bottom)
+						.data(title);
+				Line line = new Line();
+				Data data = new Data().name("é¢„æµ‹é£å‘é¢‘ç‡ï¼ˆ%ï¼‰");
+				Object[] dataArr = (Double[]) legendMap.get("dataArr");
+				data.value(dataArr);
+				line.name(title)
+						.type(SeriesType.radar).data(data);
+				option.series(line);
+			}
+		}
+		try {
+			this.pageContext.getOut().write(option.toString());
+		} catch (IOException e) {
+			System.err.print(e);
+		}
+		return Tag.EVAL_PAGE;// ç»§ç»­å¤„ç†é¡µé¢
+	}
+
 	public String getTitle() {
 		return title;
 	}
@@ -171,4 +150,4 @@ public class EChartsRadarTag extends BodyTagSupport{
 		this.legendList = legendList;
 	}
 
-}  
+}
