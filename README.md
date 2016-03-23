@@ -50,3 +50,25 @@
 
 	private List<Map<String,Object>> legendList;
 	
+**柱状图Bar的Tag:**
+```xml
+    <echarts:bar
+		title="短期预测数据对比曲线" 
+		subtitle="短期预测数据对比曲线"
+		xlist="${xlist}" 
+		ylist="${ylist}" 
+		xunitname="预测时间"
+		yunitname="实际电量(MW),实际总辐射(w/㎡)" 
+		yloction="${yloction}"/>
+```
+
+**柱状图Bar的数据格式:**		
+
+	private List<String> xlist;
+	
+	private Map<String,List<Double>> ylist;
+	
+	private Map<String,Integer> yloction;
+	
+
+	
