@@ -1,4 +1,4 @@
-#Wed Mar 23 19:34:35 CST 2016
+#Thu Mar 24 09:26:11 CST 2016
 eclipse.preferences.version=1
 encoding//src/com/hrhx/servlet/BarServlet.java=UTF-8
 encoding//src/com/hrhx/servlet/LineServlet.java=UTF-8
@@ -9,4 +9,5 @@ encoding//src/com/hrhx/tag/EChartsBigLineTag.java=UTF-8
 encoding//src/com/hrhx/tag/EChartsDoubleNumberShaftTag.java=UTF-8
 encoding//src/com/hrhx/tag/EChartsPieTag.java=UTF-8
 encoding//src/com/hrhx/tag/EChartsRadarTag.java=UTF-8
+encoding/<project>=UTF-8
 encoding/README.md=UTF-8

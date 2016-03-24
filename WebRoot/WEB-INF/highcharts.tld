@@ -30,7 +30,6 @@
 		</attribute>
 		<attribute>
 			<name>x_categories_type</name>
-			<description>月:months;周：weekdays</description>
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -103,7 +102,6 @@
 		</attribute>
 		<attribute>
 			<name>x_categories_type</name>
-			<description>月:months;周：weekdays</description>
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
