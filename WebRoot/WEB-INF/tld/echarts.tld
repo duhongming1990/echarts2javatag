@@ -137,7 +137,7 @@
 			<type>java.lang.Object</type>
 		</attribute>
 	</tag>
-		<tag>
+	<tag>
 		<name>radar</name>
 		<tag-class>com.hrhx.tag.EChartsRadarTag</tag-class>
 		<body-content>scriptless</body-content>
@@ -162,6 +162,27 @@
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
+		</attribute>
+	</tag>
+	<tag>
+		<name>pie</name>
+		<tag-class>com.hrhx.tag.EChartsPieTag</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<name>legendMap</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<name>title</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>subtitle</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 	</tag>
 </taglib>

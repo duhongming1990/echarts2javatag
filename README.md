@@ -36,19 +36,6 @@
 	
 	private Map<String,Integer> yloction;
 	
-**玫瑰图Radar的Tag:**
-```xml
-    <echarts:radar 
-		title="气象预测风向玫瑰图16方位" 
-		subtitle="预测时间"
-		legendList="${legendList}"
-		typeNum="16"
-		/>
-```
-
-**玫瑰图Radar的数据格式:**		
-
-	private List<Map<String,Object>> legendList;
 	
 **柱状图Bar的Tag:**
 ```xml
@@ -69,6 +56,37 @@
 	private Map<String,List<Double>> ylist;
 	
 	private Map<String,Integer> yloction;
+	
+	
+**饼图Pie的Tag:**
+```xml
+    <echarts:pie
+		title="某站点用户访问来源" 
+		subtitle="纯属虚构"
+		legendMap="${legendMap}"
+		/>
+```
+
+**饼图Pie的数据格式:**		
+
+	private Map<String,Object> legendMap;
+	
+**玫瑰图Radar的Tag:**
+```xml
+    <echarts:radar 
+		title="气象预测风向玫瑰图16方位" 
+		subtitle="预测时间"
+		legendList="${legendList}"
+		typeNum="16"
+		/>
+```
+
+**玫瑰图Radar的数据格式:**		
+
+	private List<Map<String,Object>> legendList;
+	
+
+
 	
 
 	
