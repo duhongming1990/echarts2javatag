@@ -38,7 +38,23 @@ http://dtmonitor.tunnel.qydev.com/echarts2javatag/
 	private Map<String,List<Double>> ylist;
 	
 	private Map<String,Integer> yloction;
-	
+
+**双数值轴折线图NumLine的Tag:**
+```xml
+	<echarts:numline 
+		title="双数值轴折线" 
+		subtitle="短期预测数据对比曲线"
+		ylist="${ylist}" 
+		xunitname="预测时间"
+		yunitname="实际电量(MW)" 
+		/>
+	// 为echarts对象加载数据 
+	myChart0.setOption(option0);
+```
+
+**双数值轴折线图NumLine的数据格式:**		
+
+	private Map<String,Double[][]> ylist;
 	
 **柱状图Bar的Tag:**
 ```xml

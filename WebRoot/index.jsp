@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -12,24 +12,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   <div>
-	<a href="LineDemo" target="_blank">Line</a><br/>
-	<img src="Line.png" width="600px" height="400px"/>
-	<img src="LineTag.png" width="600px" height="400px"/><br/>
+	<a href="LineDemo" target="_blank">折线图Line</a><br/>
+	<img src="Line.png" width="300px" height="200px"/>
+	<img src="LineTag.png" width="300px" height="200px"/><br/>
   </div>	
   <div>
-	<a href="RadarDemo" target="_blank">Radar</a><br/>
-	<img src="Radar.png" width="600px" height="400px"/>
-	<img src="RadarTag.png" width="600px" height="400px"/><br/>
-  </div>	
+	<a href="NumLineDemo" target="_blank">双数值轴折线图NumLine</a><br/>
+	<img src="NumLine.png" width="300px" height="200px"/>
+	<img src="NumLineTag.png" width="300px" height="200px"/><br/>
+  </div>
   <div>
-	<a href="BarDemo" target="_blank">Bar</a><br/>
-	<img src="Bar.png" width="600px" height="400px"/>
-	<img src="BarTag.png" width="600px" height="400px"/><br/>
+	<a href="BarDemo" target="_blank">条形图Bar</a><br/>
+	<img src="Bar.png" width="300px" height="200px"/>
+	<img src="BarTag.png" width="300px" height="200px"/><br/>
   </div>
    <div>
-	<a href="PieDemo" target="_blank">Pie</a><br/>
-	<img src="Pie.png" width="600px" height="400px"/>
-	<img src="PieTag.png" width="600px" height="400px"/><br/>
+	<a href="PieDemo" target="_blank">饼状图Pie</a><br/>
+	<img src="Pie.png" width="300px" height="200px"/>
+	<img src="PieTag.png" width="300px" height="200px"/><br/>
   </div>
+  <div>
+	<a href="RadarDemo" target="_blank">玫瑰图Radar</a><br/>
+	<img src="Radar.png" width="300px" height="200px"/>
+	<img src="RadarTag.png" width="300px" height="200px"/><br/>
+  </div>	
+  
   </body>
 </html>

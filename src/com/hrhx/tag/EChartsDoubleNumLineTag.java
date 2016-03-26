@@ -1,7 +1,6 @@
 package com.hrhx.tag;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.jsp.JspException;
@@ -9,32 +8,26 @@ import javax.servlet.jsp.tagext.BodyTag;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 import javax.servlet.jsp.tagext.Tag;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-
 import org.junit.Test;
 
+import com.github.abel533.echarts.axis.CategoryAxis;
 import com.github.abel533.echarts.axis.ValueAxis;
 import com.github.abel533.echarts.code.AxisType;
+import com.github.abel533.echarts.code.LineType;
 import com.github.abel533.echarts.code.Magic;
+import com.github.abel533.echarts.code.PointerType;
+import com.github.abel533.echarts.code.SeriesType;
+import com.github.abel533.echarts.code.Symbol;
 import com.github.abel533.echarts.code.Tool;
 import com.github.abel533.echarts.code.Trigger;
 import com.github.abel533.echarts.feature.MagicType;
 import com.github.abel533.echarts.json.GsonOption;
 import com.github.abel533.echarts.series.Line;
+import com.github.abel533.echarts.style.LineStyle;
  
-@Data
-@EqualsAndHashCode(callSuper=false)
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
-public class EChartsDoubleNumberShaftTag extends BodyTagSupport{
+public class EChartsDoubleNumLineTag extends BodyTagSupport{
 	private static final long serialVersionUID = 1L;
-	private Map<String,List<Double>> items;
-	private List<String> xlist;
+	private Map<String,Double[][]> ylist;
 	private String title;
 	private String subtitle;
 	private String yunitname;
@@ -46,7 +39,8 @@ public class EChartsDoubleNumberShaftTag extends BodyTagSupport{
 		return BodyTag.EVAL_BODY_BUFFERED;
 	}
 	
-	 @Override
+	 @SuppressWarnings("unchecked")
+	@Override
 	public int doEndTag() throws JspException {		
 		 //创建GsonOption对象，即为json字符串
 		 GsonOption option = new GsonOption();
@@ -57,6 +51,9 @@ public class EChartsDoubleNumberShaftTag extends BodyTagSupport{
 		    }
 		 */
 		 option.tooltip().trigger(Trigger.axis);
+		 option.tooltip().axisPointer().show(true)
+		                               .type(PointerType.cross)
+		                               .lineStyle(new LineStyle().type(LineType.dashed).width(1));
 		 
 		 /**
 		  * title : {
@@ -81,15 +78,51 @@ public class EChartsDoubleNumberShaftTag extends BodyTagSupport{
 		  */
 		 //工具栏
 		 option.toolbox().show(true).feature(
-			 Tool.mark,
+			 //Tool.mark,
 			 Tool.dataZoom,
-			 Tool.dataView,
-			 new MagicType(Magic.line, Magic.bar,Magic.stack,Magic.tiled),
-			 Tool.restore,
+			 //Tool.dataView,
+			 //new MagicType(Magic.line, Magic.bar,Magic.stack,Magic.tiled),
+			 //Tool.restore,
 			 Tool.saveAsImage);
 		 option.calculable(true);
 		 option.dataZoom().show(true).realtime(true).start(0).end(100);
 		 
+		 /**
+		  *     xAxis : [
+			        {
+			            type: 'value'
+			        }
+			    ]
+		  */
+		 //X轴数据设置类型
+		 ValueAxis valueAxis = new ValueAxis();
+		 valueAxis.type(AxisType.value);
+		 option.xAxis(valueAxis);
+		 
+		//Y轴数据设置类型
+		 CategoryAxis categoryAxis = new CategoryAxis();
+		 categoryAxis.type(AxisType.value);
+		 option.yAxis(categoryAxis);
+		 
+		 for(String xtitle:ylist.keySet()){
+			 option.legend().data(xtitle);
+		 }
+		 
+		 for(String mapkey:ylist.keySet()){
+			 Line line = new Line();
+			 line.name(mapkey).type(SeriesType.line).symbol(Symbol.none);
+			 Object[][] dataArr= (Double[][])ylist.get(mapkey);
+			 for(int num=0;num<dataArr.length;num++){
+				 line.data().add(dataArr[num]);
+			 }
+			
+//			if (yloction != null && yloction.get(mapkey) != null) {
+//				line.yAxisIndex(yloction.get(mapkey));
+//			} else {
+//				line.yAxisIndex(0);
+//			}
+			 option.series(line);
+		 }
 		 try {
 			this.pageContext.getOut().write(option.toString());
 		
@@ -113,27 +146,56 @@ public class EChartsDoubleNumberShaftTag extends BodyTagSupport{
 				 Tool.saveAsImage);
 			 option.calculable(true);
 			 option.dataZoom().show(true).realtime(true).start(0).end(100);
-		 /**
-		  *     xAxis : [
-			        {
-			            type: 'value'
-			        }
-			    ]
-		  */
-		 //X轴数据设置类型
-		 ValueAxis valueAxis = new ValueAxis();
-		 valueAxis.type(AxisType.value);
 		 
-		 option.legend().data("数据1");
-		 option.legend().data("数据2");
-		 
-		 Line line = new Line();
-		 int a[][]=new int [2][2];
-		 a[0][0]=1;
-		 a[0][1]=2;
-		 //line.name("数据1").type(SeriesType.line).data(a);
-		 option.series(line);
-		 System.out.println(option.toPrettyString());
 		 
 	 }
+
+	public Map<String, Double[][]> getYlist() {
+		return ylist;
+	}
+
+	public void setYlist(Map<String, Double[][]> ylist) {
+		this.ylist = ylist;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getSubtitle() {
+		return subtitle;
+	}
+
+	public void setSubtitle(String subtitle) {
+		this.subtitle = subtitle;
+	}
+
+	public String getYunitname() {
+		return yunitname;
+	}
+
+	public void setYunitname(String yunitname) {
+		this.yunitname = yunitname;
+	}
+
+	public String getXunitname() {
+		return xunitname;
+	}
+
+	public void setXunitname(String xunitname) {
+		this.xunitname = xunitname;
+	}
+
+	public Map<String, Integer> getYloction() {
+		return yloction;
+	}
+
+	public void setYloction(Map<String, Integer> yloction) {
+		this.yloction = yloction;
+	}
 }  
+
