@@ -96,17 +96,16 @@ public class EChartsRadarTag extends BodyTagSupport {
 		 * <c:forEach var="item" items="${towerList}" varStatus="status">
 		 * '${item.tower_mater}米风向', </c:forEach> ] },
 		 */
+		
 		if (legendList != null) {
 			for (Map<String, Object> legendMap : legendList) {
 				String title = legendMap.get("title").toString();
-				option.legend().orient(Orient.horizontal).x(X.left).y(Y.bottom)
-						.data(title);
+				option.legend().orient(Orient.horizontal).x(X.left).y(Y.bottom).data(title);
 				Line line = new Line();
-				Data data = new Data().name("预测风向频率（%）");
+				Data data = new Data().name(title);
 				Object[] dataArr = (Double[]) legendMap.get("dataArr");
 				data.value(dataArr);
-				line.name(title)
-						.type(SeriesType.radar).data(data);
+				line.type(SeriesType.radar).data(data);
 				option.series(line);
 			}
 		}
