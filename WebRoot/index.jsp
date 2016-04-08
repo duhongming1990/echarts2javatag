@@ -17,9 +17,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<img src="LineTag.png" width="300px" height="200px"/><br/>
   </div>	
   <div>
-	<a href="NumLineDemo" target="_blank">双数值轴折线图NumLine</a><br/>
+	<a href="NumLineDemo" target="_blank"><b style="color:red">高级折线：</b>双数值轴折线图NumLine</a><br/>
 	<img src="NumLine.png" width="300px" height="200px"/>
 	<img src="NumLineTag.png" width="300px" height="200px"/><br/>
+  </div>
+  <div>
+	<a href="GroupLineDemo" target="_blank"><b style="color:red">高级折线：</b>搭配时间轴折线图Line</a><br/>
+	<img src="GroupLine.png" width="300px" height="200px"/>
+	<img src="GroupLineTag.png" width="300px" height="200px"/><br/>
   </div>
   <div>
 	<a href="BarDemo" target="_blank">条形图Bar</a><br/>

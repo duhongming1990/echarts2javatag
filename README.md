@@ -18,6 +18,52 @@ http://dtmonitor.tunnel.qydev.com/echarts2javatag/
     <version>[2.6.2,)</version>
 </dependency>
 ```
+-----------------高级版-----------------
+
+**双数值轴折线图NumLine的Tag:**
+```xml
+	<echarts:numline 
+		title="双数值轴折线" 
+		subtitle="短期预测数据对比曲线"
+		ylist="${ylist}" 
+		xunitname="预测时间"
+		yunitname="实际电量(MW)" 
+		/>
+	// 为echarts对象加载数据 
+	myChart0.setOption(option0);
+```
+
+**双数值轴折线图NumLine的数据格式:**		
+
+	private Map<String,Double[][]> ylist;
+	
+**搭配时间轴折线图GroupLine的Tag:**
+```xml
+	<echarts:groupline 
+		title="2000年短期预测数据对比曲线" 
+		subtitle="数据来自国家统计局"
+		timelinetitle="${timelinetitle}"
+		timeline="${timeline}"
+		xlist="${xlist}" 
+		ylist="${ylist}" 
+		xunitname="预测时间"
+		yunitname="实际电量(MW)" 
+		/>
+```
+
+**搭配时间轴折线图GroupLine的数据格式:**		
+
+	private List<String> timelinetitle;
+	
+	private List<Map<String,List<Double>>> timeline;
+	
+	private List<String> xlist;
+	
+	private Map<String,List<Double>> ylist;
+	
+	private Map<String,Integer> yloction;
+
+-----------------基础版-----------------
 
 **直线Line的Tag:**
 ```xml
@@ -39,23 +85,7 @@ http://dtmonitor.tunnel.qydev.com/echarts2javatag/
 	
 	private Map<String,Integer> yloction;
 
-**双数值轴折线图NumLine的Tag:**
-```xml
-	<echarts:numline 
-		title="双数值轴折线" 
-		subtitle="短期预测数据对比曲线"
-		ylist="${ylist}" 
-		xunitname="预测时间"
-		yunitname="实际电量(MW)" 
-		/>
-	// 为echarts对象加载数据 
-	myChart0.setOption(option0);
-```
 
-**双数值轴折线图NumLine的数据格式:**		
-
-	private Map<String,Double[][]> ylist;
-	
 **柱状图Bar的Tag:**
 ```xml
     <echarts:bar
