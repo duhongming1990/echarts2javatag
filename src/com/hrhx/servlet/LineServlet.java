@@ -15,9 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 public class LineServlet extends HttpServlet {
 	private static final long serialVersionUID = -6886697421555222670L;
 	
-	private List<String> xlist;
-	private Map<String,List<Double>> ylist;
-	private Map<String,Integer> yloction;
+	private List<String> xAxisData;
+	private Map<String,List<Double>> yAxisData;
+	private Map<String,Integer> yAxisIndex;
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -28,28 +28,28 @@ public class LineServlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		//x轴数据
-		request.setAttribute("xlist", getXList());
+		request.setAttribute("xAxisData", getxAxisData());
 		//y轴数据
-		request.setAttribute("ylist", getYList());
+		request.setAttribute("yAxisData", getyAxisData());
 		//Y轴双轴情况下的位置定位
-		request.setAttribute("yloction", getYLoction());
+		request.setAttribute("yAxisIndex", getyAxisIndex());
 		
 		request.getRequestDispatcher("WEB-INF/views/line.jsp").forward(request, response);
 	}
 	
-	public List<String> getXList(){
-		xlist = new ArrayList<String>();
-		xlist.add("2015-10-10");
-		xlist.add("2015-10-11");
-		xlist.add("2015-10-12");
-		xlist.add("2015-10-13");
-		xlist.add("2015-10-14");
-		return xlist;
+	public List<String> getxAxisData(){
+		xAxisData = new ArrayList<String>();
+		xAxisData.add("2015-10-10");
+		xAxisData.add("2015-10-11");
+		xAxisData.add("2015-10-12");
+		xAxisData.add("2015-10-13");
+		xAxisData.add("2015-10-14");
+		return xAxisData;
 	}
 	
-	public Map<String,List<Double>> getYList(){
+	public Map<String,List<Double>> getyAxisData(){
 		Random random = new Random();
-		ylist = new HashMap<String,List<Double>>();
+		yAxisData = new HashMap<String,List<Double>>();
 		
 		List<Double> data1 = new ArrayList<Double>();
 		data1.add(random.nextDouble());
@@ -57,7 +57,7 @@ public class LineServlet extends HttpServlet {
 		data1.add(random.nextDouble());
 		data1.add(random.nextDouble());
 		data1.add(random.nextDouble());
-		ylist.put("曲线一", data1);
+		yAxisData.put("曲线一", data1);
 		
 		List<Double> data2 = new ArrayList<Double>();
 		data2.add(random.nextDouble());
@@ -65,16 +65,16 @@ public class LineServlet extends HttpServlet {
 		data2.add(random.nextDouble());
 		data2.add(random.nextDouble());
 		data2.add(random.nextDouble());
-		ylist.put("曲线二", data2);
+		yAxisData.put("曲线二", data2);
 		
-		return ylist;
+		return yAxisData;
 	}
 	
-	public Map<String,Integer> getYLoction(){
-		yloction = new HashMap<String,Integer>();
-		yloction.put("曲线一", 0);
-		yloction.put("曲线二", 1);
-		return yloction;
+	public Map<String,Integer> getyAxisIndex(){
+		yAxisIndex = new HashMap<String,Integer>();
+		yAxisIndex.put("曲线一", 0);
+		yAxisIndex.put("曲线二", 1);
+		return yAxisIndex;
 	}
 	
 	

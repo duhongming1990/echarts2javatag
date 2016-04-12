@@ -22,10 +22,11 @@ import com.github.abel533.echarts.series.Line;
 
 public class EChartsRadarTag extends BodyTagSupport {
 	private static final long serialVersionUID = 1L;
+	private String id;
 	private String title;
 	private String subtitle;
-	private Integer typeNum;
-	private List<Map<String, Object>> legendList;
+	private Integer polarType;
+	private List<Map<String, Object>> orientData;
 
 	@Override
 	public int doStartTag() throws JspException {
@@ -34,6 +35,10 @@ public class EChartsRadarTag extends BodyTagSupport {
 
 	@Override
 	public int doEndTag() throws JspException {
+		StringBuffer sb = new StringBuffer();
+		sb.append("<script type='text/javascript'>");
+		sb.append("require([ 'echarts', 'echarts/chart/radar'], function(ec) {");
+		sb.append("var myChart= ec.init(document.getElementById('" + id+ "'));");
 		// 创建GsonOption对象，即为json字符串
 		GsonOption option = new GsonOption();
 		/**
@@ -60,7 +65,7 @@ public class EChartsRadarTag extends BodyTagSupport {
 		// Tool.restore
 				);
 		Polar polar = new Polar();
-		if (typeNum == 8) {
+		if (polarType == 8) {
 			polar.indicator(new Data().text("正北（N）").max(100))
 					.indicator(new Data().text("西北（NW）").max(100))
 					.indicator(new Data().text("正西（W）").max(100))
@@ -70,7 +75,7 @@ public class EChartsRadarTag extends BodyTagSupport {
 					.indicator(new Data().text("正东（E）").max(100))
 					.indicator(new Data().text("东北（NE)").max(100));
 
-		} else if (typeNum == 16) {
+		} else if (polarType == 16) {
 			polar.indicator(new Data().text("正北（N）").max(100))
 					.indicator(new Data().text("北西北（NNW）").max(100))
 					.indicator(new Data().text("西北（NW）").max(100))
@@ -97,8 +102,8 @@ public class EChartsRadarTag extends BodyTagSupport {
 		 * '${item.tower_mater}米风向', </c:forEach> ] },
 		 */
 		
-		if (legendList != null) {
-			for (Map<String, Object> legendMap : legendList) {
+		if (orientData != null) {
+			for (Map<String, Object> legendMap : orientData) {
 				String title = legendMap.get("title").toString();
 				option.legend().orient(Orient.horizontal).x(X.left).y(Y.bottom).data(title);
 				Line line = new Line();
@@ -109,12 +114,25 @@ public class EChartsRadarTag extends BodyTagSupport {
 				option.series(line);
 			}
 		}
+		sb.append("var option="+option.toString()+";");
+		sb.append("myChart.setOption(option);");
+		sb.append("});");
+		sb.append("</script>");
 		try {
-			this.pageContext.getOut().write(option.toString());
+			this.pageContext.getOut().write(sb.toString());
+
 		} catch (IOException e) {
-			System.err.print(e);
+			e.printStackTrace();
 		}
 		return Tag.EVAL_PAGE;// 继续处理页面
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getTitle() {
@@ -133,20 +151,21 @@ public class EChartsRadarTag extends BodyTagSupport {
 		this.subtitle = subtitle;
 	}
 
-	public Integer getTypeNum() {
-		return typeNum;
+	public Integer getPolarType() {
+		return polarType;
 	}
 
-	public void setTypeNum(Integer typeNum) {
-		this.typeNum = typeNum;
+	public void setPolarType(Integer polarType) {
+		this.polarType = polarType;
 	}
 
-	public List<Map<String, Object>> getLegendList() {
-		return legendList;
+	public List<Map<String, Object>> getOrientData() {
+		return orientData;
 	}
 
-	public void setLegendList(List<Map<String, Object>> legendList) {
-		this.legendList = legendList;
+	public void setOrientData(List<Map<String, Object>> orientData) {
+		this.orientData = orientData;
 	}
+	
 
 }

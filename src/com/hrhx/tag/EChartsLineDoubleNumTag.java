@@ -1,7 +1,6 @@
 package com.hrhx.tag;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.jsp.JspException;
@@ -12,104 +11,116 @@ import javax.servlet.jsp.tagext.Tag;
 import com.github.abel533.echarts.axis.CategoryAxis;
 import com.github.abel533.echarts.axis.ValueAxis;
 import com.github.abel533.echarts.code.AxisType;
+import com.github.abel533.echarts.code.LineType;
+import com.github.abel533.echarts.code.PointerType;
 import com.github.abel533.echarts.code.SeriesType;
 import com.github.abel533.echarts.code.Symbol;
 import com.github.abel533.echarts.code.Tool;
 import com.github.abel533.echarts.code.Trigger;
 import com.github.abel533.echarts.json.GsonOption;
 import com.github.abel533.echarts.series.Line;
+import com.github.abel533.echarts.style.LineStyle;
 
-public class EChartsBarTag extends BodyTagSupport {
+public class EChartsLineDoubleNumTag extends BodyTagSupport {
 	private static final long serialVersionUID = 1L;
 	private String id;
 	private String title;
 	private String subtitle;
 	private String xAxisName;
 	private String yAxisName;
-	private List<String> xAxisData;
 	private Map<String, Integer> yAxisIndex;
-	private Map<String, List<Double>> yAxisData;
+	private Map<String, Double[][]> axisDataArr;
 
 	@Override
 	public int doStartTag() throws JspException {
 		return BodyTag.EVAL_BODY_BUFFERED;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public int doEndTag() throws JspException {
 		StringBuffer sb = new StringBuffer();
 		sb.append("<script type='text/javascript'>");
-		sb.append("require([ 'echarts', 'echarts/chart/bar'], function(ec) {");
-		sb.append("var myChart= ec.init(document.getElementById('" + id+ "'));");
+		sb.append("require([ 'echarts', 'echarts/chart/line'], function(ec) {");
+		sb.append("var myChart= ec.init(document.getElementById('" + id
+				+ "'));");
 		// 创建GsonOption对象，即为json字符串
 		GsonOption option = new GsonOption();
+
+		/**
+		 * tooltip : { trigger: 'axis' }
+		 */
 		option.tooltip().trigger(Trigger.axis);
+		option.tooltip().axisPointer().show(true).type(PointerType.cross)
+				.lineStyle(new LineStyle().type(LineType.dashed).width(1));
+
+		/**
+		 * title : { 'text':'2002全国宏观经济关联分析（GDP vs 房地产）', 'subtext':'数据来自国家统计局'
+		 * }
+		 */
 		option.title(title, subtitle);
+
+		/**
+		 * toolbox: { show : true, feature : { mark : {show: true}, dataZoom :
+		 * {show: true}, dataView : {show: true}, magicType : {show: true, type:
+		 * ['line', 'bar', 'stack', 'tiled']}, restore : {show: true},
+		 * saveAsImage : {show: true} } }
+		 */
 		// 工具栏
 		option.toolbox().show(true).feature(
 		// Tool.mark,
-		// Tool.dataView,
-				Tool.saveAsImage,
+				Tool.dataZoom,
+				// Tool.dataView,
 				// new MagicType(Magic.line, Magic.bar,Magic.stack,Magic.tiled),
-				Tool.dataZoom, Tool.restore);
+				// Tool.restore,
+				Tool.saveAsImage);
 		option.calculable(true);
 		option.dataZoom().show(true).realtime(true).start(0).end(100);
 
-		// X轴数据封装并解析
+		/**
+		 * xAxis : [ { type: 'value' } ]
+		 */
+		// X轴数据设置类型
 		ValueAxis valueAxis = new ValueAxis();
-		for (String s : xAxisData) {
-			valueAxis.type(AxisType.category).data(s);
-		}
-		// X轴单位
+		valueAxis.type(AxisType.value);
 		valueAxis.name(xAxisName);
 		option.xAxis(valueAxis);
-		for (String key : yAxisData.keySet()) {
-			option.legend().data(key);
-		}
-		// Y轴数据封装并解析
-		String[] unitNameArray = yAxisName.split(",");
-		for (String s : unitNameArray) {
-			CategoryAxis categoryAxis = new CategoryAxis();
-			categoryAxis.type(AxisType.value);
-			option.yAxis(categoryAxis.name(s));
-		}
-		int i = 0;
-		for (String key : yAxisData.keySet()) {
-			// 遍历list得到数据
-			List<Double> list = yAxisData.get(key);
-			Line line = new Line().name(key);
-			for (Double d : list) {
-				// KW与MW单位的转换
-				// if(settingGlobal!=null&&settingGlobal.getIskw()==0){
-				// d = d/1000;
-				// }
-				// 数据为空的话会报错，为空则为零
-				if (d != null) {
-					line.type(SeriesType.bar).data(d);
-				} else {
-					line.type(SeriesType.bar).data(0);
-				}
 
-				if (yAxisIndex != null && yAxisIndex.get(key) != null) {
-					line.type(SeriesType.bar).yAxisIndex(yAxisIndex.get(key));
-					line.symbol(Symbol.none);
-				} else {
-					line.type(SeriesType.bar).yAxisIndex(0);
-					line.symbol(Symbol.none);
-				}
+		// Y轴数据设置类型
+		CategoryAxis categoryAxis = new CategoryAxis();
+		categoryAxis.type(AxisType.value);
+		categoryAxis.name(yAxisName);
+		option.yAxis(categoryAxis);
 
+		for (String xtitle : axisDataArr.keySet()) {
+			option.legend().data(xtitle);
+		}
+
+		for (String mapkey : axisDataArr.keySet()) {
+			Line line = new Line();
+			// 显示直线，而不是密密麻麻的点，一点都不好看
+			line.name(mapkey).type(SeriesType.line).symbol(Symbol.none);
+			Object[][] dataArr = (Double[][]) axisDataArr.get(mapkey);
+			for (int num = 0; num < dataArr.length; num++) {
+				line.data().add(dataArr[num]);
+			}
+
+			if (yAxisIndex != null && yAxisIndex.get(mapkey) != null) {
+				line.yAxisIndex(yAxisIndex.get(mapkey));
+			} else {
+				line.yAxisIndex(0);
 			}
 			option.series(line);
-			i++;
 		}
-		sb.append("var option=" + option.toString() + ";");
+		sb.append("var option="+option.toString()+";");
 		sb.append("myChart.setOption(option);");
 		sb.append("});");
 		sb.append("</script>");
 		try {
 			this.pageContext.getOut().write(sb.toString());
+
 		} catch (IOException e) {
-			System.err.print(e);
+			e.printStackTrace();
 		}
 		return Tag.EVAL_PAGE;// 继续处理页面
 	}
@@ -154,14 +165,6 @@ public class EChartsBarTag extends BodyTagSupport {
 		this.yAxisName = yAxisName;
 	}
 
-	public List<String> getxAxisData() {
-		return xAxisData;
-	}
-
-	public void setxAxisData(List<String> xAxisData) {
-		this.xAxisData = xAxisData;
-	}
-
 	public Map<String, Integer> getyAxisIndex() {
 		return yAxisIndex;
 	}
@@ -170,12 +173,12 @@ public class EChartsBarTag extends BodyTagSupport {
 		this.yAxisIndex = yAxisIndex;
 	}
 
-	public Map<String, List<Double>> getyAxisData() {
-		return yAxisData;
+	public Map<String, Double[][]> getAxisDataArr() {
+		return axisDataArr;
 	}
 
-	public void setyAxisData(Map<String, List<Double>> yAxisData) {
-		this.yAxisData = yAxisData;
+	public void setAxisDataArr(Map<String, Double[][]> axisDataArr) {
+		this.axisDataArr = axisDataArr;
 	}
-
+	
 }

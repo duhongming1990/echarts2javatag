@@ -19,17 +19,17 @@ import com.github.abel533.echarts.code.Trigger;
 import com.github.abel533.echarts.json.GsonOption;
 import com.github.abel533.echarts.series.Line;
 
-public class EChartsBarTag extends BodyTagSupport {
+public class EChartsLineTag extends BodyTagSupport {
 	private static final long serialVersionUID = 1L;
-	private String id;
+	private String id ;
 	private String title;
 	private String subtitle;
 	private String xAxisName;
 	private String yAxisName;
-	private List<String> xAxisData;
+	private List<String> xAxisData;	
 	private Map<String, Integer> yAxisIndex;
 	private Map<String, List<Double>> yAxisData;
-
+	
 	@Override
 	public int doStartTag() throws JspException {
 		return BodyTag.EVAL_BODY_BUFFERED;
@@ -39,8 +39,8 @@ public class EChartsBarTag extends BodyTagSupport {
 	public int doEndTag() throws JspException {
 		StringBuffer sb = new StringBuffer();
 		sb.append("<script type='text/javascript'>");
-		sb.append("require([ 'echarts', 'echarts/chart/bar'], function(ec) {");
-		sb.append("var myChart= ec.init(document.getElementById('" + id+ "'));");
+		sb.append("require([ 'echarts', 'echarts/chart/line'], function(ec) {");
+		sb.append("var myChart= ec.init(document.getElementById('"+id+"'));");
 		// 创建GsonOption对象，即为json字符串
 		GsonOption option = new GsonOption();
 		option.tooltip().trigger(Trigger.axis);
@@ -85,24 +85,24 @@ public class EChartsBarTag extends BodyTagSupport {
 				// }
 				// 数据为空的话会报错，为空则为零
 				if (d != null) {
-					line.type(SeriesType.bar).data(d);
+					line.type(SeriesType.line).data(d);
 				} else {
-					line.type(SeriesType.bar).data(0);
+					line.type(SeriesType.line).data(0);
 				}
 
 				if (yAxisIndex != null && yAxisIndex.get(key) != null) {
-					line.type(SeriesType.bar).yAxisIndex(yAxisIndex.get(key));
+					line.type(SeriesType.line).yAxisIndex(yAxisIndex.get(key));
 					line.symbol(Symbol.none);
 				} else {
-					line.type(SeriesType.bar).yAxisIndex(0);
+					line.type(SeriesType.line).yAxisIndex(0);
+					//显示直线，而不是密密麻麻的点，一点都不好看
 					line.symbol(Symbol.none);
 				}
-
 			}
 			option.series(line);
 			i++;
 		}
-		sb.append("var option=" + option.toString() + ";");
+		sb.append("var option="+option.toString()+";");
 		sb.append("myChart.setOption(option);");
 		sb.append("});");
 		sb.append("</script>");
@@ -177,5 +177,5 @@ public class EChartsBarTag extends BodyTagSupport {
 	public void setyAxisData(Map<String, List<Double>> yAxisData) {
 		this.yAxisData = yAxisData;
 	}
-
+	
 }
