@@ -4,21 +4,21 @@
 	<div id="line_normal"  class="main000"></div>
     <echarts:line 
         id="line_normal"
-		title="短期预测数据对比曲线" 
-		subtitle="短期预测数据对比曲线"
+		title="温度对比曲线" 
+		subtitle="主要城市的温度对比曲线"
 		xAxisData="${xAxisData}" 
 		yAxisData="${yAxisData}" 
 		xAxisName="预测时间"
-		yAxisName="实际电量(MW)" />
+		yAxisName="温度(℃)" />
 		
 	双轴：
 	<div id="line_yAxisIndex"  class="main000"></div>
 	<echarts:line 
 	    id="line_yAxisIndex"
-		title="短期预测数据对比曲线" 
-		subtitle="短期预测数据对比曲线"
+		title="温度对比曲线" 
+		subtitle="主要城市的温度对比曲线"
 		xAxisData="${xAxisData}" 
 		yAxisData="${yAxisData}" 
 		xAxisName="预测时间"
-		yAxisName="实际电量(MW),实际总辐射(w/㎡)" 
+		yAxisName="最高温度(℃),最低温度(℃)" 
 		yAxisIndex="${yAxisIndex}"/>

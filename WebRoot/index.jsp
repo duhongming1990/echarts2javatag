@@ -13,7 +13,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
   <div>
 	<a href="LineDemo" target="_blank">折线图Line</a><br/>
-	<img src="images/Line.png" width="300px" height="200px"/>
+	<img src="images/Line.png" width="500px" height="200px"/>
 	<img src="images/LineTag.png" width="300px" height="200px"/><br/>
   </div>	
   <div>
