@@ -4,120 +4,106 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.hrhx.bean.ChinaWeatherDataBean;
+import com.hrhx.dao.ChinaWeatherDataDao;
 @WebServlet(name = "LineTimeLineServlet", urlPatterns = { "/LineTimeLineDemo" }, loadOnStartup = 1)
 public class LineTimeLineServlet extends HttpServlet {
+	
 	private static final long serialVersionUID = -6886697421555222670L;
-	private List<String> xAxisData;
-	private Map<String,List<Double>> yAxisData;
-	private Map<String,Integer> yAxisIndex;
-	private List<String> timelineData;
-	private List<Map<String,List<Double>>> timelineAxisData;
+	
+	//数据Dao层
+	private ChinaWeatherDataDao chinaAreaDataDao = new ChinaWeatherDataDao();
 	
 	
-	
-	public void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		this.doPost(request, response);
-	}
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		//时间轴数据
-		request.setAttribute("timelineData", gettimelineData());
-		request.setAttribute("timelineAxisData", gettimelineAxisData());
-		
-		//x轴数据
-		request.setAttribute("xAxisData", getxAxisData());
-		//y轴数据
-		request.setAttribute("yAxisData", getyAxisData());
+		//X轴的数据
+		List<String> xAxisData= new ArrayList<String>();
+		//Y轴的数据
+		Map<String,List<Double>> yAxisData = new HashMap<String,List<Double>>();
 		//Y轴双轴情况下的位置定位
-		request.setAttribute("yAxisIndex", getyAxisIndex());
+		Map<String,Integer> yAxisIndex = new HashMap<String,Integer>();
 		
+		List<Map<String,List<Double>>> timelineAxisData = new ArrayList<Map<String,List<Double>>>();
+		List<String> timelineData = chinaAreaDataDao.getYearList();
+	
+		List<ChinaWeatherDataBean> weatherDataList = chinaAreaDataDao.getAll("SELECT * FROM line_weather_main_city WHERE substr(datestr,0,5) = '2011'");
+		List<Double> beijingMaxTemp = new ArrayList<Double>();
+		List<Double> beijingMinTemp = new ArrayList<Double>();
+		List<Double> changchunMaxTemp = new ArrayList<Double>();
+		List<Double> changchunMinTemp = new ArrayList<Double>();
+		
+		for(ChinaWeatherDataBean chinaWeatherDataBean:weatherDataList){
+			//x轴数据
+			xAxisData.add(chinaWeatherDataBean.getDatestr().substring(5,10));
+			//北京最高温度
+			beijingMaxTemp.add(chinaWeatherDataBean.getBeijing_maxtemp());
+			//北京最低温度
+			beijingMinTemp.add(chinaWeatherDataBean.getBeijing_mintemp());
+			//沈阳最高温度
+			changchunMaxTemp.add(chinaWeatherDataBean.getChangchun_maxtemp());
+			//沈阳最高温度
+			changchunMinTemp.add(chinaWeatherDataBean.getChangchun_mintemp());
+		}
+		
+		//y轴数据
+		yAxisData.put("北京 最高温度", beijingMaxTemp);
+		yAxisData.put("北京 最低温度", beijingMinTemp);
+		yAxisData.put("沈阳 最高温度", changchunMaxTemp);
+		yAxisData.put("沈阳 最低温度", changchunMinTemp);
+		
+		//Y轴双轴情况下的位置定位
+		yAxisIndex.put("北京 最高温度", 0);//0表示Y轴左轴
+		yAxisIndex.put("沈阳 最高温度", 0);//0表示Y轴左轴
+		yAxisIndex.put("北京 最低温度", 1);//1表示Y轴右轴
+		yAxisIndex.put("沈阳 最低温度", 1);//1表示Y轴右轴
+		
+		for(int i=1;i<timelineData.size();i++){
+			Map<String,List<Double>> yAxisData1 = new HashMap<String,List<Double>>();
+			List<ChinaWeatherDataBean> weatherDataList1 = chinaAreaDataDao.getAll("SELECT * FROM line_weather_main_city WHERE substr(datestr,0,5) = '"+timelineData.get(i)+"'");
+			List<Double> beijingMaxTemp1 = new ArrayList<Double>();
+			List<Double> beijingMinTemp1 = new ArrayList<Double>();
+			List<Double> changchunMaxTemp1 = new ArrayList<Double>();
+			List<Double> changchunMinTemp1 = new ArrayList<Double>();
+			for(ChinaWeatherDataBean chinaWeatherDataBean1:weatherDataList1){
+				//北京最高温度
+				beijingMaxTemp1.add(chinaWeatherDataBean1.getBeijing_maxtemp());
+				//北京最低温度
+				beijingMinTemp1.add(chinaWeatherDataBean1.getBeijing_mintemp());
+				//沈阳最高温度
+				changchunMaxTemp1.add(chinaWeatherDataBean1.getChangchun_maxtemp());
+				//沈阳最高温度
+				changchunMinTemp1.add(chinaWeatherDataBean1.getChangchun_mintemp());
+			}
+			//y轴数据
+			yAxisData1.put("北京 最高温度", beijingMaxTemp1);
+			yAxisData1.put("北京 最低温度", beijingMinTemp1);
+			yAxisData1.put("沈阳 最高温度", changchunMaxTemp1);
+			yAxisData1.put("沈阳 最低温度", changchunMinTemp1);
+			timelineAxisData.add(yAxisData1);
+		}
+		
+		//时间轴数据
+		request.setAttribute("timelineData", timelineData);
+		request.setAttribute("timelineAxisData",timelineAxisData);
+		
+		request.setAttribute("yAxisIndex", yAxisIndex);
+		request.setAttribute("xAxisData", xAxisData);
+		request.setAttribute("yAxisData", yAxisData);
 		request.getRequestDispatcher("WEB-INF/views/lineTimeLine.jsp").forward(request, response);
 	}
 	
-	public List<String> gettimelineData(){
-		
-		timelineData = new ArrayList<String>();
-		
-		timelineData.add("2000");
-		
-		timelineData.add("2002");
-		
-		timelineData.add("2004");
-		
-		timelineData.add("2006");
-		
-		timelineData.add("2008");
-		
-		timelineData.add("2010");
-		
-		return timelineData;
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+		throws ServletException, IOException {
+			this.doPost(request, response);
 	}
-	
-	public List<Map<String,List<Double>>> gettimelineAxisData(){
-		timelineAxisData = new ArrayList<Map<String,List<Double>>>();
-		
-		timelineAxisData.add(getyAxisData());
-		
-		timelineAxisData.add(getyAxisData());
-		
-		timelineAxisData.add(getyAxisData());
-		
-		timelineAxisData.add(getyAxisData());
-		
-		timelineAxisData.add(getyAxisData());
-		
-		return timelineAxisData;
-	}
-	
-	public List<String> getxAxisData(){
-		xAxisData = new ArrayList<String>();
-		xAxisData.add("2015-10-10");
-		xAxisData.add("2015-10-11");
-		xAxisData.add("2015-10-12");
-		xAxisData.add("2015-10-13");
-		xAxisData.add("2015-10-14");
-		return xAxisData;
-	}
-	
-	public Map<String,List<Double>> getyAxisData(){
-		Random random = new Random();
-		yAxisData = new HashMap<String,List<Double>>();
-		
-		List<Double> data1 = new ArrayList<Double>();
-		data1.add(random.nextDouble());
-		data1.add(random.nextDouble());
-		data1.add(random.nextDouble());
-		data1.add(random.nextDouble());
-		data1.add(random.nextDouble());
-		yAxisData.put("曲线一", data1);
-		
-		List<Double> data2 = new ArrayList<Double>();
-		data2.add(random.nextDouble());
-		data2.add(random.nextDouble());
-		data2.add(random.nextDouble());
-		data2.add(random.nextDouble());
-		data2.add(random.nextDouble());
-		yAxisData.put("曲线二", data2);
-		
-		return yAxisData;
-	}
-	
-	public Map<String,Integer> getyAxisIndex(){
-		yAxisIndex = new HashMap<String,Integer>();
-		yAxisIndex.put("曲线一", 0);
-		yAxisIndex.put("曲线二", 1);
-		return yAxisIndex;
-	}
-	
-	
 
 }

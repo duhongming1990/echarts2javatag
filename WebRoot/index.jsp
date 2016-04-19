@@ -13,7 +13,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
   <div>
 	<a href="LineDemo" target="_blank">折线图Line</a><br/>
-	<img src="images/Line.png" width="500px" height="200px"/>
+	<img src="images/Line.png" width="600px" height="200px"/>
 	<img src="images/LineTag.png" width="300px" height="200px"/><br/>
   </div>	
   <div>
@@ -23,7 +23,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </div>
   <div>
 	<a href="LineTimeLineDemo" target="_blank"><b style="color:red">高级折线：</b>搭配时间轴折线图Line</a><br/>
-	<img src="images/GroupLine.png" width="300px" height="200px"/>
+	<img src="images/LineTimeLine.png" width="600px" height="200px"/>
 	<img src="images/LineTimeLineTag.png" width="300px" height="200px"/><br/>
   </div>
   <div>

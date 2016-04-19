@@ -4,10 +4,10 @@
 	<div id=line_normal  class="main000"></div>
 	<echarts:lineTimeLine
 	    id="line_normal"
-		title="2000年短期预测数据对比曲线" 
-		subtitle="数据来自国家统计局"
+		title="2011年温度对比曲线" 
+		subtitle="主要城市的温度对比曲线"
 		xAxisName="预测时间"
-		yAxisName="实际电量(MW)" 
+		yAxisName="温度(℃)" 
 		xAxisData="${xAxisData}" 
 		yAxisData="${yAxisData}" 
 		timelineData="${timelineData}"
@@ -17,10 +17,10 @@
 	<div id="line_yAxisIndex"  class="main000"></div>
 	<echarts:lineTimeLine
 		id="line_yAxisIndex"
-		title="2000年短期预测数据对比曲线" 
-		subtitle="数据来自国家统计局"
+		title="2011年温度对比曲线" 
+		subtitle="主要城市的温度对比曲线"
 		xAxisName="预测时间"
-		yAxisName="实际电量(MW),实际总辐射(w/㎡)" 
+		yAxisName="最高温度(℃),最低温度(℃)" 
 		xAxisData="${xAxisData}" 
 		yAxisData="${yAxisData}"
 		timelineData="${timelineData}"

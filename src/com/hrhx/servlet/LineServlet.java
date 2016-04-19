@@ -18,22 +18,18 @@ public class LineServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = -6886697421555222670L;
 	
+	//数据Dao层
 	private ChinaWeatherDataDao chinaAreaDataDao = new ChinaWeatherDataDao();
 	
-	private List<String> xAxisData;
-	private Map<String,List<Double>> yAxisData;
-	private Map<String,Integer> yAxisIndex;
-	
-	public void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		
-		this.doPost(request, response);
-	}
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		xAxisData= new ArrayList<String>();
-		yAxisData = new HashMap<String,List<Double>>();
+		//X轴的数据
+		List<String> xAxisData= new ArrayList<String>();
+		//Y轴的数据
+		Map<String,List<Double>> yAxisData = new HashMap<String,List<Double>>();
+		//Y轴双轴情况下的位置定位
+		Map<String,Integer> yAxisIndex = new HashMap<String,Integer>();
 		
 		List<ChinaWeatherDataBean> weatherDataList= chinaAreaDataDao.getAll("SELECT * FROM line_weather_main_city");
 		
@@ -41,6 +37,7 @@ public class LineServlet extends HttpServlet {
 		List<Double> beijingMinTemp = new ArrayList<Double>();
 		List<Double> changchunMaxTemp = new ArrayList<Double>();
 		List<Double> changchunMinTemp = new ArrayList<Double>();
+		
 		for(ChinaWeatherDataBean chinaWeatherDataBean:weatherDataList){
 			//x轴数据
 			xAxisData.add(chinaWeatherDataBean.getDatestr());
@@ -53,27 +50,27 @@ public class LineServlet extends HttpServlet {
 			//沈阳最高温度
 			changchunMinTemp.add(chinaWeatherDataBean.getChangchun_mintemp());
 		}
+		
 		//y轴数据
 		yAxisData.put("北京 最高温度", beijingMaxTemp);
 		yAxisData.put("北京 最低温度", beijingMinTemp);
 		yAxisData.put("沈阳 最高温度", changchunMaxTemp);
 		yAxisData.put("沈阳 最低温度", changchunMinTemp);
+		
+		//Y轴双轴情况下的位置定位
+		yAxisIndex.put("北京 最高温度", 0);//0表示Y轴左轴
+		yAxisIndex.put("沈阳 最高温度", 0);//0表示Y轴左轴
+		yAxisIndex.put("北京 最低温度", 1);//1表示Y轴右轴
+		yAxisIndex.put("沈阳 最低温度", 1);//1表示Y轴右轴
+		
+		request.setAttribute("yAxisIndex", yAxisIndex);
 		request.setAttribute("xAxisData", xAxisData);
 		request.setAttribute("yAxisData", yAxisData);
-		//Y轴双轴情况下的位置定位
-		request.setAttribute("yAxisIndex", getyAxisIndex());
 		request.getRequestDispatcher("WEB-INF/views/line.jsp").forward(request, response);
 	}
 	
-	public Map<String,Integer> getyAxisIndex(){
-		yAxisIndex = new HashMap<String,Integer>();
-		yAxisIndex.put("北京 最高温度", 0);
-		yAxisIndex.put("沈阳 最高温度", 0);
-		yAxisIndex.put("北京 最低温度", 1);
-		yAxisIndex.put("沈阳 最低温度", 1);
-		return yAxisIndex;
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+		throws ServletException, IOException {
+			this.doPost(request, response);
 	}
-	
-	
-
 }

@@ -4,7 +4,7 @@
 	<div id="line_normal"  class="main000"></div>
     <echarts:line 
         id="line_normal"
-		title="温度对比曲线" 
+		title="2011年温度对比曲线" 
 		subtitle="主要城市的温度对比曲线"
 		xAxisData="${xAxisData}" 
 		yAxisData="${yAxisData}" 
@@ -15,7 +15,7 @@
 	<div id="line_yAxisIndex"  class="main000"></div>
 	<echarts:line 
 	    id="line_yAxisIndex"
-		title="温度对比曲线" 
+		title="2011年温度对比曲线" 
 		subtitle="主要城市的温度对比曲线"
 		xAxisData="${xAxisData}" 
 		yAxisData="${yAxisData}" 

@@ -15,6 +15,33 @@ public class ChinaWeatherDataDao {
 	
 	private ConnectionSource  connectionSource = Config.getConnectionSource();
 	
+	public List<String> getYearList(){
+		Dao<ChinaWeatherDataBean, String> dao;
+		String query = "SELECT substr(datestr,0,5) datestr FROM line_weather_main_city GROUP BY substr(datestr,0,5)";
+		try {
+			dao = DaoManager.createDao(connectionSource,ChinaWeatherDataBean.class);
+			GenericRawResults<String> rawResults = dao.queryRaw(query,new RawRowMapper<String>(){
+				@Override
+				public String mapRow(String[] columnNames,
+					String[] resultColumns) throws SQLException {
+					return resultColumns[0];
+				}
+			});
+			List<String> results = rawResults.getResults();
+			return results;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}finally{
+			try {
+				connectionSource.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}	
+	}
 	public List<ChinaWeatherDataBean> getAll(String query){
 		Dao<ChinaWeatherDataBean, String> dao;
 		try {
