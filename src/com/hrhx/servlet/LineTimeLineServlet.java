@@ -31,8 +31,9 @@ public class LineTimeLineServlet extends HttpServlet {
 		Map<String,List<Double>> yAxisData = new HashMap<String,List<Double>>();
 		//Y轴双轴情况下的位置定位
 		Map<String,Integer> yAxisIndex = new HashMap<String,Integer>();
-		
+		//TimeLine的Y轴数据
 		List<Map<String,List<Double>>> timelineAxisData = new ArrayList<Map<String,List<Double>>>();
+		//TimeLine的X轴数据
 		List<String> timelineData = chinaAreaDataDao.getYearList();
 	
 		List<ChinaWeatherDataBean> weatherDataList = chinaAreaDataDao.getAll("SELECT * FROM line_weather_main_city WHERE substr(datestr,0,5) = '2011'");
