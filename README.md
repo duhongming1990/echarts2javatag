@@ -5,7 +5,7 @@
 **演示地址:**
 http://dtmonitor.tunnel.qydev.com/echarts2javatag/
 
-**china_weatherdb数据库:**
+**china_weather.db数据库:**
 http://git.oschina.net/duhongming/echarts2javatag/attach_files
 
 china_weather.7z >>>解压>>> 放到项目Src下面就行了！
@@ -23,7 +23,7 @@ china_weather.7z >>>解压>>> 放到项目Src下面就行了！
 	    <artifactId>gson</artifactId>
 	    <version>[2.6.2,)</version>
 	</dependency>
-	<!-- Echarts图表依赖包开始结束 -->
+	<!-- Echarts图表依赖包结束 -->
 	
    <!-- Sqlite数据库API以及ORM框架开始 -->
    <dependency>
@@ -40,7 +40,7 @@ china_weather.7z >>>解压>>> 放到项目Src下面就行了！
 ```
 -----------------高级版-----------------
 
-**双数值轴折线图lineDoubleNum的Tag:**
+**1 双数值轴折线图lineDoubleNum的Tag:**
 ```xml
 	<div id="line_doubleNum"  class="main000"></div>
 	<echarts:lineDoubleNum 
@@ -52,11 +52,11 @@ china_weather.7z >>>解压>>> 放到项目Src下面就行了！
 		axisDataArr="${axisDataArr}"/>
 ```
 
-**双数值轴折线图lineDoubleNum的数据格式:**		
+**1 双数值轴折线图lineDoubleNum的数据格式:**		
 
 	private Map<String,Double[][]> axisDataArr;
 	
-**搭配时间轴折线图lineTimeLine的Tag:**
+**2 搭配时间轴折线图lineTimeLine的Tag:**
 ```xml
 	<div id="line_yAxisIndex"  class="main000"></div>
 	<echarts:lineTimeLine
@@ -72,7 +72,7 @@ china_weather.7z >>>解压>>> 放到项目Src下面就行了！
 		yAxisIndex="${yAxisIndex}"/>
 ```
 
-**搭配时间轴折线图lineTimeLine的数据格式:**		
+**2 搭配时间轴折线图lineTimeLine的数据格式:**		
 
 	//X轴的数据
 	List<String> xAxisData;
@@ -94,7 +94,7 @@ china_weather.7z >>>解压>>> 放到项目Src下面就行了！
 
 -----------------基础版-----------------
 
-**直线Line的Tag:**
+**1 直线Line的Tag:**
 ```xml
 	<div id="line_yAxisIndex"  class="main000"></div>
 	<echarts:line 
@@ -108,7 +108,7 @@ china_weather.7z >>>解压>>> 放到项目Src下面就行了！
 		yAxisIndex="${yAxisIndex}"/>
 ```
 
-**直线Line的数据格式:**		
+**1 直线Line的数据格式:**		
 
 	//X轴的数据
 	List<String> xAxisData;
@@ -119,7 +119,7 @@ china_weather.7z >>>解压>>> 放到项目Src下面就行了！
 	//Y轴双轴情况下的位置定位
 	Map<String,Integer> yAxisIndex;
 
-**柱状图Bar的Tag:**
+**2 柱状图Bar的Tag:**
 ```xml
    <div id="line_yAxisIndex"  class="main000"></div>
    <echarts:bar
@@ -133,7 +133,7 @@ china_weather.7z >>>解压>>> 放到项目Src下面就行了！
 		yAxisIndex="${yAxisIndex}"/>
 ```
 
-**柱状图Bar的数据格式:**		
+**2 柱状图Bar的数据格式:**		
 
 	private List<String> xAxisData;
 	
@@ -141,7 +141,7 @@ china_weather.7z >>>解压>>> 放到项目Src下面就行了！
 	
 	private Map<String,Integer> yAxisIndex;
 	
-**饼图Pie的Tag:**
+**3 饼图Pie的Tag:**
 ```xml
    	<div id="pie"  class="main000"></div>
 	<echarts:pie
@@ -151,11 +151,11 @@ china_weather.7z >>>解压>>> 放到项目Src下面就行了！
 		orientData="${orientData}"/>
 ```
 
-**饼图Pie的数据格式:**		
+**3 饼图Pie的数据格式:**		
 
 	private Map<String,Object> orientData;
 	
-**玫瑰图Radar的Tag:**
+**4 玫瑰图Radar的Tag:**
 ```xml
    <div id="radar16"  class="main000"></div>
 	<echarts:radar 
@@ -166,7 +166,7 @@ china_weather.7z >>>解压>>> 放到项目Src下面就行了！
 		polarType="16"/>
 ```
 
-**玫瑰图Radar的数据格式:**		
+**4 玫瑰图Radar的数据格式:**		
 
 	private List<Map<String,Object>> orientData;
 	
