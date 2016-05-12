@@ -37,6 +37,10 @@ public class LineServlet extends HttpServlet {
 		List<Double> beijingMinTemp = new ArrayList<Double>();
 		List<Double> changchunMaxTemp = new ArrayList<Double>();
 		List<Double> changchunMinTemp = new ArrayList<Double>();
+		List<Double> shenyangMaxTemp = new ArrayList<Double>();
+		List<Double> shenyangMinTemp = new ArrayList<Double>();
+		List<Double> haerbinMaxTemp = new ArrayList<Double>();
+		List<Double> haerbinMinTemp = new ArrayList<Double>();
 		
 		for(ChinaWeatherDataBean chinaWeatherDataBean:weatherDataList){
 			//x轴数据
@@ -45,23 +49,40 @@ public class LineServlet extends HttpServlet {
 			beijingMaxTemp.add(chinaWeatherDataBean.getBeijing_maxtemp());
 			//北京最低温度
 			beijingMinTemp.add(chinaWeatherDataBean.getBeijing_mintemp());
-			//沈阳最高温度
+			//长春最高温度
 			changchunMaxTemp.add(chinaWeatherDataBean.getChangchun_maxtemp());
-			//沈阳最高温度
+			//长春最高温度
 			changchunMinTemp.add(chinaWeatherDataBean.getChangchun_mintemp());
+			//沈阳最高温度
+			shenyangMaxTemp.add(chinaWeatherDataBean.getShenyang_maxtemp());
+			//沈阳最高温度
+			shenyangMinTemp.add(chinaWeatherDataBean.getShenyang_mintemp());
+			//哈尔滨最高温度
+			haerbinMaxTemp.add(chinaWeatherDataBean.getHaerbin_maxtemp());
+			//哈尔滨最高温度
+			haerbinMinTemp.add(chinaWeatherDataBean.getHaerbin_mintemp());
+			
 		}
 		
 		//y轴数据
 		yAxisData.put("北京 最高温度", beijingMaxTemp);
 		yAxisData.put("北京 最低温度", beijingMinTemp);
-		yAxisData.put("沈阳 最高温度", changchunMaxTemp);
-		yAxisData.put("沈阳 最低温度", changchunMinTemp);
+		yAxisData.put("长春 最高温度", changchunMaxTemp);
+		yAxisData.put("长春 最低温度", changchunMinTemp);
+		yAxisData.put("沈阳 最高温度", shenyangMaxTemp);
+		yAxisData.put("沈阳 最低温度", shenyangMinTemp);
+		yAxisData.put("哈尔滨 最高温度", haerbinMinTemp);
+		yAxisData.put("哈尔滨 最低温度", haerbinMinTemp);
 		
 		//Y轴双轴情况下的位置定位
 		yAxisIndex.put("北京 最高温度", 0);//0表示Y轴左轴
+		yAxisIndex.put("长春 最高温度", 0);//0表示Y轴左轴
 		yAxisIndex.put("沈阳 最高温度", 0);//0表示Y轴左轴
+		yAxisIndex.put("哈尔滨 最高温度", 0);//0表示Y轴左轴
 		yAxisIndex.put("北京 最低温度", 1);//1表示Y轴右轴
+		yAxisIndex.put("长春 最低温度", 1);//1表示Y轴右轴
 		yAxisIndex.put("沈阳 最低温度", 1);//1表示Y轴右轴
+		yAxisIndex.put("哈尔滨 最低温度", 1);//1表示Y轴右轴
 		
 		request.setAttribute("yAxisIndex", yAxisIndex);
 		request.setAttribute("xAxisData", xAxisData);
