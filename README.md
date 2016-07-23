@@ -3,7 +3,7 @@
 通过自定义标签实现echarts图表展示
 
 **演示地址:**
-http://dtmonitor.tunnel.qydev.com/echarts2javatag/
+http://charts.ittun.com/echarts2javatag/
 
 **china_weather.db数据库:**
 http://git.oschina.net/duhongming/echarts2javatag/attach_files
