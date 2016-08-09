@@ -42,5 +42,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<img src="images/RadarTag.png" width="300px" height="200px"/><br/>
   </div>	
   
+  <div>
+	<a href="/echarts2javatag/styles/ueditor1_4_3_3-utf8-jsp/charts.html" target="_blank">UEditor编辑图表</a><br/>
+  </div>
   </body>
 </html>
