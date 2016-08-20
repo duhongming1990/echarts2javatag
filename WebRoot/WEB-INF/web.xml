@@ -1,29 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:jsp="http://java.sun.com/xml/ns/javaee/jsp" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
-  <display-name></display-name>
-  <welcome-file-list>
-    <welcome-file>index.jsp</welcome-file>
-  </welcome-file-list>
-  <jsp-config>
-    <taglib>
-      <taglib-uri>http://java.sun.com/jstl/fmt</taglib-uri>
-      <taglib-location>/WEB-INF/tld/fmt.tld</taglib-location>
-    </taglib>
-    <taglib>
-      <taglib-uri>http://java.sun.com/jstl/core</taglib-uri>
-      <taglib-location>/WEB-INF/tld/c.tld</taglib-location>
-    </taglib>
-    <taglib>
-      <taglib-uri>http://java.sun.com/jstl/sql</taglib-uri>
-      <taglib-location>/WEB-INF/tld/sql.tld</taglib-location>
-    </taglib>
-    <taglib>
-      <taglib-uri>http://java.sun.com/jstl/x</taglib-uri>
-      <taglib-location>/WEB-INF/tld/x.tld</taglib-location>
-    </taglib>
-    <taglib>
-      <taglib-uri>http://echarts.baidu.com/jstl/echarts</taglib-uri>
-      <taglib-location>/WEB-INF/tld/echarts.tld</taglib-location>
-    </taglib>
-  </jsp-config>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:jsp="http://java.sun.com/xml/ns/javaee/jsp"
+	xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
+	<display-name></display-name>
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+	<listener>
+		<description>Comet4J容器侦听</description>
+		<listener-class>org.comet4j.core.CometAppListener</listener-class>
+	</listener>
+	
+	<servlet>
+		<description>Comet连接[默认:org.comet4j.core.CometServlet]</description>
+		<display-name>CometServlet</display-name>
+		<servlet-name>CometServlet</servlet-name>
+		<servlet-class>org.comet4j.core.CometServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>CometServlet</servlet-name>
+		<url-pattern>/connComet4J</url-pattern>
+	</servlet-mapping>
+
+	<listener>
+		<description>Comet4jTest</description>
+		<listener-class>com.hrhx.servlet.DynamicLineData</listener-class>
+	</listener>
 </web-app>

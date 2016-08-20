@@ -1,12 +1,14 @@
-#Tue Apr 12 09:52:19 CST 2016
+#Fri Aug 19 19:50:07 CST 2016
 eclipse.preferences.version=1
 encoding//src/com/hrhx/servlet/BarServlet.java=UTF-8
+encoding//src/com/hrhx/servlet/DynamicLineServlet.java=UTF-8
 encoding//src/com/hrhx/servlet/LineDoubleNumServlet.java=UTF-8
 encoding//src/com/hrhx/servlet/LineServlet.java=UTF-8
 encoding//src/com/hrhx/servlet/LineTimeLineServlet.java=UTF-8
 encoding//src/com/hrhx/servlet/PieServlet.java=UTF-8
 encoding//src/com/hrhx/servlet/RadarServlet.java=UTF-8
 encoding//src/com/hrhx/tag/EChartsBarTag.java=UTF-8
+encoding//src/com/hrhx/tag/EChartsDynamicLineTag.java=UTF-8
 encoding//src/com/hrhx/tag/EChartsLineDoubleNumTag.java=UTF-8
 encoding//src/com/hrhx/tag/EChartsLineTag.java=UTF-8
 encoding//src/com/hrhx/tag/EChartsLineTimeLineTag.java=UTF-8

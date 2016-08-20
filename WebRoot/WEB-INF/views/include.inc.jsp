@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%@ taglib uri="http://echarts.baidu.com/jstl/echarts" prefix="echarts"%>
+<%@ taglib uri="http://java.sun.com/jsp/hrhx/echarts" prefix="echarts"%>
 <%
 	String basePath = request.getContextPath();
 %>
@@ -41,3 +41,5 @@
 		} 
 	});
 </script>
+<script type="text/javascript" src="<%=basePath%>/styles/comet4j/js/comet4j.js"></script>
+<script type="text/javascript" src="<%=basePath%>/styles/jquery-1.10.2.min.js"></script>

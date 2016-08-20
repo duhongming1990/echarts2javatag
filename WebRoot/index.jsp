@@ -11,6 +11,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
+  ////////////////////////////////////////////////////////DEMO造就想法/////////////////////////////////////////////////
+  <div>
+  	<a href="styles/echarts-2.2.7/doc/example.html" target="_blank">Echarts官网demo</a>
+  </div>
+  <div>
+	<a href="/echarts2javatag/styles/ueditor1_4_3_3-utf8-jsp/charts.html" target="_blank">UEditor编辑图表</a><br/>
+  </div>
+  /////////////////////////////////////////////////////////静态图表///////////////////////////////////////////////////
   <div>
 	<a href="LineDemo" target="_blank">折线图Line</a><br/>
 	<img src="images/Line.png" width="600px" height="200px"/>
@@ -41,9 +49,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<img src="images/Radar.png" width="300px" height="200px"/>
 	<img src="images/RadarTag.png" width="300px" height="200px"/><br/>
   </div>	
-  
+  /////////////////////////////////////////////////////////动态图表///////////////////////////////////////////////////
   <div>
-	<a href="/echarts2javatag/styles/ueditor1_4_3_3-utf8-jsp/charts.html" target="_blank">UEditor编辑图表</a><br/>
+	<a href="DynamicLineDemo" target="_blank">动态折线图Line</a><br/>
+	<img src="images/DynamicLine.png" width="600px" height="200px"/>
+	<img src="images/DynamicLineTag.png" width="300px" height="200px"/><br/>
   </div>
   </body>
 </html>
