@@ -11,7 +11,7 @@ import org.comet4j.core.CometEngine;
 
 import com.hrhx.bean.ChinaWeatherDataBean;
   
-public class DynamicLineData implements ServletContextListener {  
+public class LineDynamicData implements ServletContextListener {  
         private static final String CHANNEL = "dynamicLine";  
         public void contextInitialized(ServletContextEvent arg0) {  
                 CometContext cc = CometContext.getInstance();  
@@ -25,7 +25,7 @@ public class DynamicLineData implements ServletContextListener {
                 public void run() {  
                         while (true) {  
                                 try {  
-                                        Thread.sleep(10);  
+                                        Thread.sleep(1000);  
                                 } catch (Exception ex) {  
                                         ex.printStackTrace();  
                                 }  

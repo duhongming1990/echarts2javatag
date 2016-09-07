@@ -39,6 +39,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<img src="images/Bar.png" width="300px" height="200px"/>
 	<img src="images/BarTag.png" width="300px" height="200px"/><br/>
   </div>
+  <div>
+	<a href="ReverseBarDemo" target="_blank">反转条形图Bar</a><br/>
+	<img src="images/ReverseBar.png" width="300px" height="200px"/>
+	<img src="images/ReverseBarTag.png" width="300px" height="200px"/><br/>
+  </div>
    <div>
 	<a href="PieDemo" target="_blank">饼状图Pie</a><br/>
 	<img src="images/Pie.png" width="300px" height="200px"/>
@@ -51,9 +56,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </div>	
   /////////////////////////////////////////////////////////动态图表///////////////////////////////////////////////////
   <div>
-	<a href="DynamicLineDemo" target="_blank">动态折线图Line</a><br/>
-	<img src="images/DynamicLine.png" width="600px" height="200px"/>
-	<img src="images/DynamicLineTag.png" width="300px" height="200px"/><br/>
+	<a href="DynamicLineDemo" target="_blank"><b style="color:red">高级折线：</b>动态折线图Line</a><br/>
+	<img src="images/DynamicLine.png" width="600px" height="300px"/>
+	<img src="images/DynamicLineTag.png" width="600px" height="300px"/><br/>
   </div>
   </body>
 </html>

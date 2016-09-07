@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.hrhx.bean.ChinaWeatherDataBean;
 import com.hrhx.dao.ChinaWeatherDataDao;
-@WebServlet(name = "LineServlet", urlPatterns = { "/DynamicLineDemo" }, loadOnStartup = 1)
-public class DynamicLineServlet extends HttpServlet {
+@WebServlet(name = "LineDynamicServlet", urlPatterns = { "/DynamicLineDemo" }, loadOnStartup = 1)
+public class LineDynamicServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = -6886697421555222670L;
 	

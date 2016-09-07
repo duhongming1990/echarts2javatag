@@ -52,7 +52,8 @@ public class EChartsPieTag extends BodyTagSupport {
 		
 		// 数据轴封装并解析
 		for(String xdata : orientData.keySet()) {
-			option.legend().orient(Orient.horizontal).x(X.left).y(Y.bottom).data(xdata);
+			//option.legend().orient(Orient.horizontal).x(X.left).y(Y.bottom).data(xdata);
+			option.legend().orient(Orient.vertical).x(X.left).y(Y.center).data(xdata);
 		}
 		
 		if (orientData != null) {

@@ -28,6 +28,6 @@
 
 	<listener>
 		<description>Comet4jTest</description>
-		<listener-class>com.hrhx.servlet.DynamicLineData</listener-class>
+		<listener-class>com.hrhx.servlet.LineDynamicData</listener-class>
 	</listener>
 </web-app>

@@ -240,6 +240,62 @@
 		</attribute>
 	</tag>
 	<tag>
+		<name>barReverse</name>
+		<tag-class>com.hrhx.tag.EChartsBarReverseTag</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<name>id</name>
+			<description>与div里面的id相同</description>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute> 
+		<attribute>
+			<name>title</name>
+			<description>图表的标题</description>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>subtitle</name>
+			<description>图表的副标题</description>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>xAxisName</name>
+			<description>X轴的名称</description>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>yAxisName</name>
+			<description>Y轴的名称</description>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>xAxisData</name>
+			<description>X轴的数据</description>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<name>yAxisData</name>
+			<description>Y轴的数据</description>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<name>yAxisIndex</name>
+			<description>图表中的数据对应的Y轴</description>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Object</type>
+		</attribute>
+	</tag>
+	<tag>
 		<name>pie</name>
 		<tag-class>com.hrhx.tag.EChartsPieTag</tag-class>
 		<body-content>scriptless</body-content>
@@ -305,4 +361,61 @@
 			<type>java.lang.Object</type>
 		</attribute>
     </tag>
+    
+    <tag>
+		<name>dynamicLine</name>
+		<tag-class>com.hrhx.tag.EChartsDynamicLineTag</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<name>id</name>
+			<description>与div里面的id相同</description>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute> 
+		<attribute>
+			<name>title</name>
+			<description>图表的标题</description>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>subtitle</name>
+			<description>图表的副标题</description>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>xAxisName</name>
+			<description>X轴的名称</description>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>yAxisName</name>
+			<description>Y轴的名称</description>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>xAxisData</name>
+			<description>X轴的数据</description>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<name>yAxisData</name>
+			<description>Y轴的数据</description>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<name>yAxisIndex</name>
+			<description>图表中的数据对应的Y轴</description>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Object</type>
+		</attribute>
+	</tag>
 </taglib>
