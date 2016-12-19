@@ -10,6 +10,7 @@
 		yAxisData="${yAxisData}" 
 		xAxisName="预测时间"
 		yAxisName="实际电量(MW)" 
+		itemStyleShow="true"
 		/>
 	双轴：
 	<div id="line_yAxisIndex"  class="main000"></div>
@@ -21,4 +22,5 @@
 		yAxisData="${yAxisData}" 
 		xAxisName="预测时间"
 		yAxisName="实际电量(MW),实际总辐射(w/㎡)" 
-		yAxisIndex="${yAxisIndex}"/>
+		yAxisIndex="${yAxisIndex}"
+		/>

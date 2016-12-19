@@ -12,8 +12,8 @@ import javax.servlet.jsp.tagext.Tag;
 import com.github.abel533.echarts.axis.CategoryAxis;
 import com.github.abel533.echarts.axis.ValueAxis;
 import com.github.abel533.echarts.code.AxisType;
+import com.github.abel533.echarts.code.Position;
 import com.github.abel533.echarts.code.SeriesType;
-import com.github.abel533.echarts.code.Symbol;
 import com.github.abel533.echarts.code.Tool;
 import com.github.abel533.echarts.code.Trigger;
 import com.github.abel533.echarts.json.GsonOption;
@@ -29,6 +29,7 @@ public class EChartsBarTag extends BodyTagSupport {
 	private List<String> xAxisData;
 	private Map<String, Integer> yAxisIndex;
 	private Map<String, List<Double>> yAxisData;
+	private Boolean itemStyleShow;
 
 	@Override
 	public int doStartTag() throws JspException {
@@ -39,8 +40,8 @@ public class EChartsBarTag extends BodyTagSupport {
 	public int doEndTag() throws JspException {
 		StringBuffer sb = new StringBuffer();
 		sb.append("<script type='text/javascript'>");
-		sb.append("require([ 'echarts', 'echarts/chart/bar'], function(ec) {");
-		sb.append("var myChart= ec.init(document.getElementById('" + id+ "'));");
+		sb.append("require([ 'echarts', 'echarts/chart/line','echarts/chart/bar'], function(ec) {");
+		sb.append("var myChart= ec.init(document.getElementById('" + id+ "'));myChart.setTheme('macarons');");
 		// 创建GsonOption对象，即为json字符串
 		GsonOption option = new GsonOption();
 		option.tooltip().trigger(Trigger.axis);
@@ -53,12 +54,12 @@ public class EChartsBarTag extends BodyTagSupport {
 				// new MagicType(Magic.line, Magic.bar,Magic.stack,Magic.tiled),
 				Tool.dataZoom, Tool.restore);
 		option.calculable(true);
-		option.dataZoom().show(true).realtime(true).start(0).end(100);
+		//option.dataZoom().show(true).realtime(true).start(0).end(100);
 
 		// X轴数据封装并解析
 		ValueAxis valueAxis = new ValueAxis();
 		for (String s : xAxisData) {
-			valueAxis.type(AxisType.category).data(s);
+			valueAxis.type(AxisType.category).data(s).axisLabel().rotate(30);
 		}
 		// X轴单位
 		valueAxis.name(xAxisName);
@@ -84,19 +85,25 @@ public class EChartsBarTag extends BodyTagSupport {
 				// d = d/1000;
 				// }
 				// 数据为空的话会报错，为空则为零
+				//line.symbol(Symbol.none);
+				//添加注释
+				line.itemStyle().normal().label().show(itemStyleShow).position(Position.top);
+				line.type(SeriesType.bar);
 				if (d != null) {
-					line.type(SeriesType.bar).data(d);
+					line.data(d);
 				} else {
-					line.type(SeriesType.bar).data(0);
+					line.data(0);
 				}
-
-				if (yAxisIndex != null && yAxisIndex.get(key) != null) {
+				if(yAxisIndex != null&&yAxisIndex.size()>=3){
+					if (yAxisIndex.get(key) != null&&yAxisIndex.get(key)==1) {
+						line.type(SeriesType.line).yAxisIndex(yAxisIndex.get(key));
+					} else {
+						line.type(SeriesType.bar).yAxisIndex(0);
+					}
+				}else if(yAxisIndex != null&&yAxisIndex.get(key) != null){
 					line.type(SeriesType.bar).yAxisIndex(yAxisIndex.get(key));
-					line.symbol(Symbol.none);
-				} else {
-					line.type(SeriesType.bar).yAxisIndex(0);
-					line.symbol(Symbol.none);
 				}
+				
 
 			}
 			option.series(line);
@@ -176,6 +183,14 @@ public class EChartsBarTag extends BodyTagSupport {
 
 	public void setyAxisData(Map<String, List<Double>> yAxisData) {
 		this.yAxisData = yAxisData;
+	}
+
+	public Boolean getItemStyleShow() {
+		return itemStyleShow;
+	}
+
+	public void setItemStyleShow(Boolean itemStyleShow) {
+		this.itemStyleShow = itemStyleShow;
 	}
 
 }

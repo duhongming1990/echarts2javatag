@@ -9,7 +9,8 @@
 		xAxisData="${xAxisData}" 
 		yAxisData="${yAxisData}" 
 		xAxisName="预测时间"
-		yAxisName="温度(℃)" />
+		yAxisName="温度(℃)"
+		itemStyleShow="true" />
 		
 	双轴：
 	<div id="line_yAxisIndex"  class="main000"></div>
@@ -21,4 +22,5 @@
 		yAxisData="${yAxisData}" 
 		xAxisName="预测时间"
 		yAxisName="最高温度(℃),最低温度(℃)" 
-		yAxisIndex="${yAxisIndex}"/>
+		yAxisIndex="${yAxisIndex}"
+		itemStyleShow="true"/>

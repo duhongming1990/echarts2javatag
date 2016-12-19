@@ -13,6 +13,7 @@ import com.github.abel533.echarts.axis.CategoryAxis;
 import com.github.abel533.echarts.axis.ValueAxis;
 import com.github.abel533.echarts.code.AxisType;
 import com.github.abel533.echarts.code.Orient;
+import com.github.abel533.echarts.code.Position;
 import com.github.abel533.echarts.code.SeriesType;
 import com.github.abel533.echarts.code.Symbol;
 import com.github.abel533.echarts.code.Tool;
@@ -34,7 +35,7 @@ public class EChartsLineTimeLineTag extends BodyTagSupport {
 	private Map<String, List<Double>> yAxisData;
 	private List<String> timelineData;
 	private List<Map<String, List<Double>>> timelineAxisData;
-
+	private Boolean itemStyleShow;
 	@Override
 	public int doStartTag() throws JspException {
 		return BodyTag.EVAL_BODY_BUFFERED;
@@ -46,7 +47,7 @@ public class EChartsLineTimeLineTag extends BodyTagSupport {
 		sb.append("<script type='text/javascript'>");
 		sb.append("require([ 'echarts', 'echarts/chart/line'], function(ec) {");
 		sb.append("var myChart= ec.init(document.getElementById('" + id
-				+ "'));");
+				+ "'));myChart.setTheme('macarons');");
 		GsonOption option = new GsonOption();
 
 		GsonOption options = new GsonOption();
@@ -129,6 +130,7 @@ public class EChartsLineTimeLineTag extends BodyTagSupport {
 			// 遍历list得到数据
 			List<Double> list = yAxisData.get(key);
 			Line line = new Line().name(key);
+			line.itemStyle().normal().label().show(itemStyleShow).position(Position.top);
 			for (Double d : list) {
 				// KW与MW单位的转换
 				// if(settingGlobal!=null&&settingGlobal.getIskw()==0){
@@ -283,5 +285,11 @@ public class EChartsLineTimeLineTag extends BodyTagSupport {
 			List<Map<String, List<Double>>> timelineAxisData) {
 		this.timelineAxisData = timelineAxisData;
 	}
+	public Boolean getItemStyleShow() {
+		return itemStyleShow;
+	}
 
+	public void setItemStyleShow(Boolean itemStyleShow) {
+		this.itemStyleShow = itemStyleShow;
+	}
 }

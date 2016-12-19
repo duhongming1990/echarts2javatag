@@ -12,6 +12,7 @@ import javax.servlet.jsp.tagext.Tag;
 import com.github.abel533.echarts.axis.CategoryAxis;
 import com.github.abel533.echarts.axis.ValueAxis;
 import com.github.abel533.echarts.code.AxisType;
+import com.github.abel533.echarts.code.Position;
 import com.github.abel533.echarts.code.SeriesType;
 import com.github.abel533.echarts.code.Symbol;
 import com.github.abel533.echarts.code.Tool;
@@ -29,6 +30,7 @@ public class EChartsDynamicLineTag extends BodyTagSupport {
 	private List<String> xAxisData;	
 	private Map<String, Integer> yAxisIndex;
 	private Map<String, List<Double>> yAxisData;
+	private Boolean itemStyleShow;
 	
 	@Override
 	public int doStartTag() throws JspException {
@@ -74,6 +76,7 @@ public class EChartsDynamicLineTag extends BodyTagSupport {
 			// 遍历list得到数据
 			List<Double> list = yAxisData.get(key);
 			Line line = new Line().name(key);
+			line.itemStyle().normal().label().show(itemStyleShow).position(Position.top);
 			for (Double d : list) {
 				// KW与MW单位的转换
 				// if(settingGlobal!=null&&settingGlobal.getIskw()==0){
@@ -168,6 +171,14 @@ public class EChartsDynamicLineTag extends BodyTagSupport {
 
 	public void setyAxisData(Map<String, List<Double>> yAxisData) {
 		this.yAxisData = yAxisData;
+	}
+
+	public Boolean getItemStyleShow() {
+		return itemStyleShow;
+	}
+
+	public void setItemStyleShow(Boolean itemStyleShow) {
+		this.itemStyleShow = itemStyleShow;
 	}
 	
 }

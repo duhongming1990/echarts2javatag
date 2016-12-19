@@ -67,13 +67,22 @@ public class BarServlet extends HttpServlet {
 		data2.add(random.nextDouble());
 		yAxisData.put("柱状二", data2);
 		
+		List<Double> data3 = new ArrayList<Double>();
+		data3.add(random.nextDouble());
+		data3.add(random.nextDouble());
+		data3.add(random.nextDouble());
+		data3.add(random.nextDouble());
+		data3.add(random.nextDouble());
+		yAxisData.put("柱状三", data3);
+		
 		return yAxisData;
 	}
 	
 	public Map<String,Integer> getyAxisIndex(){
 		yAxisIndex = new HashMap<String,Integer>();
 		yAxisIndex.put("柱状一", 0);
-		yAxisIndex.put("柱状二", 1);
+		yAxisIndex.put("柱状二", 0);
+		yAxisIndex.put("柱状三", 1);
 		return yAxisIndex;
 	}
 	

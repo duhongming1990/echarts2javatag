@@ -12,7 +12,7 @@
             function (ec) {
                 // 基于准备好的dom，初始化echarts图表
                 var myChart = ec.init(document.getElementById('line_normal')); 
-                
+                myChart.setTheme('macarons');
                 var option =<echarts:dynamicLine 
 					        id="line_normal"
 							title="本机剩余内存" 
@@ -20,7 +20,8 @@
 							xAxisData="${xAxisData}" 
 							yAxisData="${yAxisData}" 
 							xAxisName="采样时间"
-							yAxisName="内存量(KB)" /> ;
+							yAxisName="内存量(KB)"
+							itemStyleShow="true" /> ;
         
                 // 为echarts对象加载数据 
                 myChart.setOption(option);

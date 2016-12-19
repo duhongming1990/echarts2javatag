@@ -32,9 +32,9 @@ public class LineDynamicData implements ServletContextListener {
                                 CometEngine engine = CometContext.getInstance().getEngine();  
                                 //engine.sendToAll(CHANNEL, Runtime.getRuntime().freeMemory()/1024);
                                 ChinaWeatherDataBean chinaWeatherDataBean = new ChinaWeatherDataBean();
-                                chinaWeatherDataBean.setBeijing_maxtemp(Runtime.getRuntime().freeMemory()/1024);
+                                chinaWeatherDataBean.setBeijing_maxtemp(Runtime.getRuntime().freeMemory()/1024/1024/1024);
                                 Date date = new Date();
-                                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                                 chinaWeatherDataBean.setDatestr(sdf.format(date));
                                 engine.sendToAll(CHANNEL, chinaWeatherDataBean);  
                         }  

@@ -61,6 +61,13 @@
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
 		</attribute>
+		<attribute>
+			<name>itemStyleShow</name>
+			<description>图表中的数据项是否显示</description>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Boolean</type>
+		</attribute>
 	</tag>
 	<tag>
 		<name>lineDoubleNum</name>
@@ -110,6 +117,13 @@
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<name>itemStyleShow</name>
+			<description>图表中的数据项是否显示</description>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Boolean</type>
 		</attribute>
 	</tag>
 	<tag>
@@ -181,6 +195,13 @@
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
 		</attribute>
+		<attribute>
+			<name>itemStyleShow</name>
+			<description>图表中的数据项是否显示</description>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Boolean</type>
+		</attribute>
 		
 	</tag>
 	<tag>
@@ -238,6 +259,13 @@
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
 		</attribute>
+		<attribute>
+			<name>itemStyleShow</name>
+			<description>图表中的数据项是否显示</description>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Boolean</type>
+		</attribute>
 	</tag>
 	<tag>
 		<name>barReverse</name>
@@ -294,6 +322,13 @@
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
 		</attribute>
+		<attribute>
+			<name>itemStyleShow</name>
+			<description>图表中的数据项是否显示</description>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Boolean</type>
+		</attribute>
 	</tag>
 	<tag>
 		<name>pie</name>
@@ -323,6 +358,13 @@
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<name>itemStyleShow</name>
+			<description>图表中的数据项是否显示</description>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Boolean</type>
 		</attribute>
 	</tag>
 	    <tag>
@@ -416,6 +458,13 @@
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<name>itemStyleShow</name>
+			<description>图表中的数据项是否显示</description>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Boolean</type>
 		</attribute>
 	</tag>
 </taglib>

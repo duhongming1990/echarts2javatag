@@ -5,4 +5,5 @@
 	    id="pie"
 		title="某站点用户访问来源" 
 		subtitle="纯属虚构"
-		orientData="${orientData}"/>
+		orientData="${orientData}"
+		itemStyleShow="true"/>

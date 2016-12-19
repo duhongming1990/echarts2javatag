@@ -8,4 +8,6 @@
 		subtitle="短期预测数据对比曲线"
 		xAxisName="预测时间"
 		yAxisName="实际电量(MW)" 
-		axisDataArr="${axisDataArr}"/>
+		axisDataArr="${axisDataArr}"
+		itemStyleShow="true"
+		/>

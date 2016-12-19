@@ -9,5 +9,6 @@
 		xAxisData="${xAxisData}" 
 		yAxisData="${yAxisData}" 
 		xAxisName="预测时间"
-		yAxisName="实际电量(MW)" 
+		yAxisName="实际电量(MW)"
+		itemStyleShow="true" 
 		/>

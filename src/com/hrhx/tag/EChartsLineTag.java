@@ -12,10 +12,13 @@ import javax.servlet.jsp.tagext.Tag;
 import com.github.abel533.echarts.axis.CategoryAxis;
 import com.github.abel533.echarts.axis.ValueAxis;
 import com.github.abel533.echarts.code.AxisType;
+import com.github.abel533.echarts.code.Magic;
+import com.github.abel533.echarts.code.Position;
 import com.github.abel533.echarts.code.SeriesType;
 import com.github.abel533.echarts.code.Symbol;
 import com.github.abel533.echarts.code.Tool;
 import com.github.abel533.echarts.code.Trigger;
+import com.github.abel533.echarts.feature.MagicType;
 import com.github.abel533.echarts.json.GsonOption;
 import com.github.abel533.echarts.series.Line;
 
@@ -29,7 +32,7 @@ public class EChartsLineTag extends BodyTagSupport {
 	private List<String> xAxisData;	
 	private Map<String, Integer> yAxisIndex;
 	private Map<String, List<Double>> yAxisData;
-	
+	private Boolean itemStyleShow;
 	@Override
 	public int doStartTag() throws JspException {
 		return BodyTag.EVAL_BODY_BUFFERED;
@@ -39,8 +42,8 @@ public class EChartsLineTag extends BodyTagSupport {
 	public int doEndTag() throws JspException {
 		StringBuffer sb = new StringBuffer();
 		sb.append("<script type='text/javascript'>");
-		sb.append("require([ 'echarts', 'echarts/chart/line'], function(ec) {");
-		sb.append("var myChart= ec.init(document.getElementById('"+id+"'));");
+		sb.append("require([ 'echarts', 'echarts/chart/line','echarts/chart/bar','echarts/chart/map'], function(ec) {");
+		sb.append("var myChart= ec.init(document.getElementById('"+id+"'));myChart.setTheme('macarons');");
 		// 创建GsonOption对象，即为json字符串
 		GsonOption option = new GsonOption();
 		option.tooltip().trigger(Trigger.axis);
@@ -50,7 +53,7 @@ public class EChartsLineTag extends BodyTagSupport {
 		// Tool.mark,
 		// Tool.dataView,
 				Tool.saveAsImage,
-				// new MagicType(Magic.line, Magic.bar,Magic.stack,Magic.tiled),
+				new MagicType(Magic.line, Magic.bar),
 				Tool.dataZoom, Tool.restore);
 		option.calculable(true);
 		option.dataZoom().show(true).realtime(true).start(0).end(100);
@@ -77,26 +80,20 @@ public class EChartsLineTag extends BodyTagSupport {
 		for (String key : yAxisData.keySet()) {
 			// 遍历list得到数据
 			List<Double> list = yAxisData.get(key);
-			Line line = new Line().name(key);
+			////显示直线，而不是密密麻麻的点，一点都不好看
+			Line line = new Line().name(key).type(SeriesType.line).symbol(Symbol.none);
 			for (Double d : list) {
-				// KW与MW单位的转换
-				// if(settingGlobal!=null&&settingGlobal.getIskw()==0){
-				// d = d/1000;
-				// }
 				// 数据为空的话会报错，为空则为零
+				line.itemStyle().normal().label().show(itemStyleShow).position(Position.top);
 				if (d != null) {
-					line.type(SeriesType.line).data(d);
+					line.data(d);
 				} else {
-					line.type(SeriesType.line).data(0);
+					line.data(0);
 				}
-
 				if (yAxisIndex != null && yAxisIndex.get(key) != null) {
-					line.type(SeriesType.line).yAxisIndex(yAxisIndex.get(key));
-					line.symbol(Symbol.none);
+					line.yAxisIndex(yAxisIndex.get(key));
 				} else {
-					line.type(SeriesType.line).yAxisIndex(0);
-					//显示直线，而不是密密麻麻的点，一点都不好看
-					line.symbol(Symbol.none);
+					line.yAxisIndex(0);
 				}
 			}
 			option.series(line);
@@ -176,6 +173,13 @@ public class EChartsLineTag extends BodyTagSupport {
 
 	public void setyAxisData(Map<String, List<Double>> yAxisData) {
 		this.yAxisData = yAxisData;
+	}
+	public Boolean getItemStyleShow() {
+		return itemStyleShow;
+	}
+
+	public void setItemStyleShow(Boolean itemStyleShow) {
+		this.itemStyleShow = itemStyleShow;
 	}
 	
 }

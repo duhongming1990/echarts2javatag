@@ -11,6 +11,7 @@ import javax.servlet.jsp.tagext.Tag;
 
 import com.github.abel533.echarts.axis.ValueAxis;
 import com.github.abel533.echarts.code.AxisType;
+import com.github.abel533.echarts.code.Position;
 import com.github.abel533.echarts.code.SeriesType;
 import com.github.abel533.echarts.code.Symbol;
 import com.github.abel533.echarts.code.Tool;
@@ -28,6 +29,7 @@ public class EChartsBarReverseTag extends BodyTagSupport {
 	private List<String> xAxisData;
 	private Map<String, Integer> yAxisIndex;
 	private Map<String, List<Double>> yAxisData;
+	private Boolean itemStyleShow;
 
 	@Override
 	public int doStartTag() throws JspException {
@@ -39,7 +41,7 @@ public class EChartsBarReverseTag extends BodyTagSupport {
 		StringBuffer sb = new StringBuffer();
 		sb.append("<script type='text/javascript'>");
 		sb.append("require([ 'echarts', 'echarts/chart/bar'], function(ec) {");
-		sb.append("var myChart= ec.init(document.getElementById('" + id+ "'));");
+		sb.append("var myChart= ec.init(document.getElementById('" + id+ "'));myChart.setTheme('macarons');");
 		// 创建GsonOption对象，即为json字符串
 		GsonOption option = new GsonOption();
 		option.tooltip().trigger(Trigger.axis);
@@ -71,6 +73,7 @@ public class EChartsBarReverseTag extends BodyTagSupport {
 			// 遍历list得到数据
 			List<Double> list = yAxisData.get(key);
 			Line line = new Line().name(key);
+			line.itemStyle().normal().label().show(itemStyleShow).position(Position.right);
 			for (Double d : list) {
 				// 数据为空的话会报错，为空则为零
 				if (d != null) {
@@ -89,7 +92,7 @@ public class EChartsBarReverseTag extends BodyTagSupport {
 		sb.append("</script>");
 		try {
 			this.pageContext.getOut().write(sb.toString());
-			System.out.println(sb.toString());
+			//System.out.println(sb.toString());
 		} catch (IOException e) {
 			System.err.print(e);
 		}
@@ -158,6 +161,14 @@ public class EChartsBarReverseTag extends BodyTagSupport {
 
 	public void setyAxisData(Map<String, List<Double>> yAxisData) {
 		this.yAxisData = yAxisData;
+	}
+
+	public Boolean getItemStyleShow() {
+		return itemStyleShow;
+	}
+
+	public void setItemStyleShow(Boolean itemStyleShow) {
+		this.itemStyleShow = itemStyleShow;
 	}
 
 }

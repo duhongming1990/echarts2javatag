@@ -38,7 +38,7 @@ public class EChartsRadarTag extends BodyTagSupport {
 		StringBuffer sb = new StringBuffer();
 		sb.append("<script type='text/javascript'>");
 		sb.append("require([ 'echarts', 'echarts/chart/radar'], function(ec) {");
-		sb.append("var myChart= ec.init(document.getElementById('" + id+ "'));");
+		sb.append("var myChart= ec.init(document.getElementById('" + id+ "'));myChart.setTheme('macarons');");
 		// 创建GsonOption对象，即为json字符串
 		GsonOption option = new GsonOption();
 		/**

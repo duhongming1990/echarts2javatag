@@ -13,6 +13,7 @@ import com.github.abel533.echarts.axis.ValueAxis;
 import com.github.abel533.echarts.code.AxisType;
 import com.github.abel533.echarts.code.LineType;
 import com.github.abel533.echarts.code.PointerType;
+import com.github.abel533.echarts.code.Position;
 import com.github.abel533.echarts.code.SeriesType;
 import com.github.abel533.echarts.code.Symbol;
 import com.github.abel533.echarts.code.Tool;
@@ -30,7 +31,7 @@ public class EChartsLineDoubleNumTag extends BodyTagSupport {
 	private String yAxisName;
 	private Map<String, Integer> yAxisIndex;
 	private Map<String, Double[][]> axisDataArr;
-
+	private Boolean itemStyleShow;
 	@Override
 	public int doStartTag() throws JspException {
 		return BodyTag.EVAL_BODY_BUFFERED;
@@ -43,7 +44,7 @@ public class EChartsLineDoubleNumTag extends BodyTagSupport {
 		sb.append("<script type='text/javascript'>");
 		sb.append("require([ 'echarts', 'echarts/chart/line'], function(ec) {");
 		sb.append("var myChart= ec.init(document.getElementById('" + id
-				+ "'));");
+				+ "'));myChart.setTheme('macarons');");
 		// 创建GsonOption对象，即为json字符串
 		GsonOption option = new GsonOption();
 
@@ -100,6 +101,7 @@ public class EChartsLineDoubleNumTag extends BodyTagSupport {
 			Line line = new Line();
 			// 显示直线，而不是密密麻麻的点，一点都不好看
 			line.name(mapkey).type(SeriesType.line).symbol(Symbol.none);
+			line.itemStyle().normal().label().show(itemStyleShow).position(Position.top);
 			Object[][] dataArr = (Double[][]) axisDataArr.get(mapkey);
 			for (int num = 0; num < dataArr.length; num++) {
 				line.data().add(dataArr[num]);
@@ -179,6 +181,14 @@ public class EChartsLineDoubleNumTag extends BodyTagSupport {
 
 	public void setAxisDataArr(Map<String, Double[][]> axisDataArr) {
 		this.axisDataArr = axisDataArr;
+	}
+
+	public Boolean getItemStyleShow() {
+		return itemStyleShow;
+	}
+
+	public void setItemStyleShow(Boolean itemStyleShow) {
+		this.itemStyleShow = itemStyleShow;
 	}
 	
 }

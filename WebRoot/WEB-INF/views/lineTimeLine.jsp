@@ -12,6 +12,7 @@
 		yAxisData="${yAxisData}" 
 		timelineData="${timelineData}"
 		timelineAxisData="${timelineAxisData}"
+		itemStyleShow="true"
 		/>
 	双轴：
 	<div id="line_yAxisIndex"  class="main000"></div>
@@ -25,4 +26,5 @@
 		yAxisData="${yAxisData}"
 		timelineData="${timelineData}"
 		timelineAxisData="${timelineAxisData}"
-		yAxisIndex="${yAxisIndex}"/>
+		yAxisIndex="${yAxisIndex}"
+		itemStyleShow="true"/>
