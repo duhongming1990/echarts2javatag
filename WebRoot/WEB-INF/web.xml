@@ -8,26 +8,4 @@
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
-
-	<listener>
-		<description>Comet4J容器侦听</description>
-		<listener-class>org.comet4j.core.CometAppListener</listener-class>
-	</listener>
-	
-	<servlet>
-		<description>Comet连接[默认:org.comet4j.core.CometServlet]</description>
-		<display-name>CometServlet</display-name>
-		<servlet-name>CometServlet</servlet-name>
-		<servlet-class>org.comet4j.core.CometServlet</servlet-class>
-	</servlet>
-	
-	<servlet-mapping>
-		<servlet-name>CometServlet</servlet-name>
-		<url-pattern>/connComet4J</url-pattern>
-	</servlet-mapping>
-
-	<listener>
-		<description>Comet4jTest</description>
-		<listener-class>com.hrhx.servlet.LineDynamicData</listener-class>
-	</listener>
 </web-app>

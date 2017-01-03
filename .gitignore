@@ -19,3 +19,4 @@ hs_err_pid*
 .settings/
 WebRoot/WEB-INF/classes/
 src/china_weather.db
+/target/
