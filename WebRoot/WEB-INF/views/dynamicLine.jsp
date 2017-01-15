@@ -1,9 +1,31 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ include file="/WEB-INF/views/include.inc.jsp"%>
+<html>
+	<head>
+		<script type="text/javascript" src="<%=basePath%>/styles/sockjs-client-master/dist/sockjs-1.1.1.min.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){ 
+	            var uri = "/echarts2javatag/webSocket/data";
+	            var ws = new SockJS(uri);  
+	            ws.onopen = function () {
+	                //console.log('Info: connection opened.');  
+	            };  
+	            ws.onmessage = function (event) { 
+	            	var json=eval("("+event.data+")");//将数据转成json格式
+	            	console.log('Received: ' + json); 
+	            };
+	            ws.onclose = function (event) {  
+	                console.log('Info: connection closed.');  
+	                console.log(event);  
+	            };
+	         });
+		</script>
+	</head>
 <body>
 	单轴：
 	<div id="line_normal"  class="main000"></div>
-	<script type="text/javascript">
+	
+	<script type="text/javascript">         
 		require(
             [
                 'echarts',
@@ -25,23 +47,6 @@
         
                 // 为echarts对象加载数据 
                 myChart.setOption(option);
-                
-                $(document).ready(function(){ 
-			        JS.Engine.on({
-			             dynamicLine : function(echartsData){//侦听一个channel
-			                  myChart.addData([
-						        [
-						            0,        // 系列索引
-						            echartsData.beijing_maxtemp, // 新增数据
-						            false,     // 新增数据是否从队列头部插入
-						            false,     // 是否增加队列长度，false则自定删除原有数据，队头插入删队尾，队尾插入删队头
-						            echartsData.datestr, // 坐标轴标签
-						        ]
-						      ]);	
-						}
-			        });
-			        JS.Engine.start('connComet4J');
-		       });
 			});
 		
     </script>
@@ -75,3 +80,5 @@
         );
     </script>
 </body>	
+
+</html>

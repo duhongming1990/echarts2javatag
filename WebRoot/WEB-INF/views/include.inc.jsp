@@ -41,5 +41,4 @@
 		} 
 	});
 </script>
-<script type="text/javascript" src="<%=basePath%>/styles/comet4j/js/comet4j.js"></script>
-<script type="text/javascript" src="<%=basePath%>/styles/jquery-1.10.2.min.js"></script>
+<script src="<%=basePath%>/styles/jquery/jquery-1.8.3.min.js" type="text/javascript"></script>

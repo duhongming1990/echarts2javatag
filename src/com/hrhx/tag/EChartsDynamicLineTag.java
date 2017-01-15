@@ -37,6 +37,7 @@ public class EChartsDynamicLineTag extends BodyTagSupport {
 		return BodyTag.EVAL_BODY_BUFFERED;
 	}
 
+	@SuppressWarnings("unused")
 	@Override
 	public int doEndTag() throws JspException {
 		// 创建GsonOption对象，即为json字符串
