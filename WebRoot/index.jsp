@@ -60,5 +60,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<img src="images/DynamicLine.png" width="600px" height="300px"/>
 	<img src="images/DynamicLineTag.png" width="600px" height="300px"/><br/>
   </div>
+  
+  <div>
+	<a href="GaugeDemo" target="_blank"><b style="color:red">高级仪表盘：</b>仪表盘Gauge</a><br/>
+	<img src="images/DynamicGauge.png" width="600px" height="300px"/>
+	<img src="images/DynamicGaugeTag.png" width="600px" height="300px"/><br/>
+  </div>
   </body>
 </html>
