@@ -2,8 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%@ taglib uri="http://java.sun.com/jsp/hrhx/echarts" prefix="echarts"%>
-<%@ taglib prefix="ec" tagdir="/WEB-INF/tags/echarts" %>
+<%@ taglib uri="http://java.sun.com/jsp/hrhx/echarts2.2.7" prefix="echarts"%>
+<%@ taglib prefix="ec" tagdir="/WEB-INF/tags/echarts2.2.7" %>
 <%
 	String basePath = request.getContextPath();
 %>

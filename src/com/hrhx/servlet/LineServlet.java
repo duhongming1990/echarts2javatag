@@ -87,7 +87,7 @@ public class LineServlet extends HttpServlet {
 		request.setAttribute("yAxisIndex", yAxisIndex);
 		request.setAttribute("xAxisData", xAxisData);
 		request.setAttribute("yAxisData", yAxisData);
-		request.getRequestDispatcher("WEB-INF/views/line.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/views/line/line.jsp").forward(request, response);
 	}
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response)

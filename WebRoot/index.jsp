@@ -13,7 +13,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
   ////////////////////////////////////////////////////////DEMO造就想法/////////////////////////////////////////////////
   <div>
-  	<a href="styles/echarts-2.2.7/doc/example.html" target="_blank">Echarts官网demo</a>
+  	<a href="styles/echarts-2.2.7/doc/example.html" target="_blank">Echarts2.2.7</a>
+  </div>
+  <div>
+  	<a href="styles/echarts-3.4.0/test/-primary-cases.html" target="_blank">Echarts3.4.0</a>
   </div>
   <div>
 	<a href="/echarts2javatag/styles/ueditor1_4_3_3-utf8-jsp/charts.html" target="_blank">UEditor编辑图表</a><br/>
@@ -65,6 +68,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<a href="GaugeDemo" target="_blank"><b style="color:red">高级仪表盘：</b>仪表盘Gauge</a><br/>
 	<img src="images/DynamicGauge.png" width="600px" height="300px"/>
 	<img src="images/DynamicGaugeTag.png" width="600px" height="300px"/><br/>
+  </div>
+  /////////////////////////////////////////////////////////地图图表///////////////////////////////////////////////////
+  <div>
+	<a href="map/china" target="_blank"><b style="color:red">中国地图</b></a><br/>
+	<img src="" width="600px" height="300px"/>
+	<img src="" width="600px" height="300px"/><br/>
   </div>
   </body>
 </html>

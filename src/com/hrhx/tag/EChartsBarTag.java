@@ -36,7 +36,6 @@ public class EChartsBarTag extends BodyTagSupport {
 		return BodyTag.EVAL_BODY_BUFFERED;
 	}
 
-	@SuppressWarnings("unused")
 	@Override
 	public int doEndTag() throws JspException {
 		StringBuffer sb = new StringBuffer();

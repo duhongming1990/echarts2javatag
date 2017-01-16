@@ -25,7 +25,7 @@ public class LineDoubleNumServlet extends HttpServlet {
 
 		//x+y轴数据Double[x轴数据][y轴数据]
 		request.setAttribute("axisDataArr", getaxisDataArr());
-		request.getRequestDispatcher("WEB-INF/views/lineDoubleNum.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/views/line/lineDoubleNum.jsp").forward(request, response);
 	}
 	
 	public Map<String,Double[][]> getaxisDataArr(){

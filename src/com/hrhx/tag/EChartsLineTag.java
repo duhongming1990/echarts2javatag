@@ -33,12 +33,12 @@ public class EChartsLineTag extends BodyTagSupport {
 	private Map<String, Integer> yAxisIndex;
 	private Map<String, List<Double>> yAxisData;
 	private Boolean itemStyleShow;
+	
 	@Override
 	public int doStartTag() throws JspException {
 		return BodyTag.EVAL_BODY_BUFFERED;
 	}
-
-	@SuppressWarnings("unused")
+	
 	@Override
 	public int doEndTag() throws JspException {
 		StringBuffer sb = new StringBuffer();

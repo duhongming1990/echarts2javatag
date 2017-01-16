@@ -34,7 +34,7 @@ public class BarReverseServlet extends HttpServlet {
 		//Y轴双轴情况下的位置定位
 		request.setAttribute("yAxisIndex", getyAxisIndex());
 		
-		request.getRequestDispatcher("WEB-INF/views/barReverse.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/views/bar/barReverse.jsp").forward(request, response);
 	}
 	
 	public List<String> getxAxisData(){
