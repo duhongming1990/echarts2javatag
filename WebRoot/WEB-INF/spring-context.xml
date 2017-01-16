@@ -18,13 +18,5 @@
 	<context:component-scan base-package="com.hrhx"><!-- base-package 如果多个，用“,”分隔 -->
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
-	
-	
-	<!-- 计划任务配置，用 @Service @Lazy(false)标注类，用@Scheduled(cron = "0 0 2 * * ?")标注方法 -->
-    <task:executor id="executor" pool-size="10"/> <task:scheduler id="scheduler" pool-size="10"/>
-    <task:annotation-driven scheduler="scheduler" executor="executor" proxy-target-class="true"/>
-    <task:scheduled-tasks>  
-		<task:scheduled ref="dataScheduledTask" method="piToRedisPisnapshotBF" cron="0/2 * * * * ?" /> <!--实时数据存入Redis生成每2秒自动执行-->     
-    </task:scheduled-tasks>  
 
 </beans>

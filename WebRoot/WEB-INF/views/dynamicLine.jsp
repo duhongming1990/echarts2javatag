@@ -1,8 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@ include file="/WEB-INF/views/include.inc.jsp"%>
 <html>
 	<head>
-		<script type="text/javascript" src="<%=basePath%>/styles/sockjs-client-master/dist/sockjs-1.1.1.min.js"></script>
+		<%@ include file="/WEB-INF/views/include.inc.jsp"%>
 		<script type="text/javascript">
 			$(document).ready(function(){ 
 	            var uri = "/echarts2javatag/webSocket/data";
