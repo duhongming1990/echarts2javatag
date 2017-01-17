@@ -1,12 +1,24 @@
 <%@ tag language="java" pageEncoding="UTF-8"%>
+
 <%@ attribute name="id" type="java.lang.String" required="true" description="div的ID"%>
-<%@ attribute name="measureRange" type="java.lang.String" required="true" description="量程"%>
-<%@ attribute name="unitName" type="java.lang.String" required="true" description="单位"%>
-<%@ attribute name="dataType" type="java.lang.String" required="true" description="数据类型"%>
 <%@ attribute name="title" type="java.lang.String" required="true" description="标题"%>
+<%@ attribute name="subtitle" type="java.lang.String" required="false" description="子标题"%>
+
+<%@ attribute name="height" type="java.lang.String" required="true" description="图表高度"%>
+
+<%@ attribute name="toFixed" type="java.lang.Integer" required="true" description="保留小数位数"%>
+<%@ attribute name="measureRange" type="java.lang.Integer" required="true" description="量程"%>
+<%@ attribute name="splitNumber" type="java.lang.Integer" required="true" description="切分等份"%>
+<%@ attribute name="axisLabelShow" type="java.lang.Boolean" required="true" description="是否显示刻度"%>
+
+
+<%@ attribute name="unitName" type="java.lang.String" required="true" description="单位"%>
+
+<%@ attribute name="uri" type="java.lang.String" required="true" description="Socket URL地址"%>
+
 <style type="text/css">
     .main${id} {
-        height: 360px;
+        height: ${height};
         /*width: 778px !important;*/
         overflow: hidden;
         padding : 10px;
@@ -21,10 +33,7 @@
     }
 </style>
 <div id="${id}" class="main${id}" ></div>
-<input type="text" id="input${id}" >
 <script type="text/javascript">
-	var myChart${id};
-	var option${id};
     // 使用
     require(
         [
@@ -33,31 +42,31 @@
         ],
         function (ec) {
             // 基于准备好的dom，初始化echarts图表
-            myChart${id} = ec.init(document.getElementById('${id}')); 
-			option${id} = {
+            var myChart${id} = ec.init(document.getElementById('${id}')); 
+			var option${id} = {
 				title : {
 			        text: '${title}',
-			       
+			        subtext: '${subtitle}'
 			    },
 			    tooltip : {
 			        formatter: "{a} <br/>{c} {b}"
 			    },
 			    toolbox: {
-			        show : false,
+			        show : true,
 			        feature : {
 			            mark : {show: false},
 			            restore : {show: false},
-			            saveAsImage : {show: false}
+			            saveAsImage : {show: true}
 			        }
 			    },
 			    series : [
 			        {
-			            name:'${dataType}',
+			            name:'${id}',
 			            type:'gauge',
 			            z: 3,
 			            min:0,
-			            max:'${measureRange}',
-			            splitNumber:11,
+			            max:${measureRange},
+			            splitNumber:${splitNumber},
 			            axisLine: {            // 坐标轴线
 			                lineStyle: {       // 属性lineStyle控制线条样式
 			                    width: 10
@@ -70,7 +79,7 @@
 			                }
 			            },
 			             axisLabel: {           // 坐标轴文本标签，详见axis.axisLabel
-			                show:true,
+			                show:${axisLabelShow},
 			              	textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
 			                    color: 'auto'
 			                }
@@ -97,11 +106,26 @@
 			        }
 			    ]
 			};
-			myChart${id}.setOption(option${id}); 	       
+			myChart${id}.setOption(option${id}); 
+	            var ws = new SockJS("${uri}");  
+	            ws.onopen = function () {
+	                console.log('Info: connection opened.');  
+	            };  
+	            ws.onmessage = function (event) { 
+	            	var json=eval("("+event.data+")");//将数据转成json格式
+	            	$.each(json,function(i,item){
+	            		if(item.tag=='${id}'){
+	            			option${id}.series[0].data[0].value = item.value.toFixed(${toFixed});
+     						myChart${id}.setOption(option${id},true);
+	            		}	
+	            		console.log('Received: ' + '#'+item.tag+':'+item.value); 
+	            	});
+	            	
+	            };
+	            ws.onclose = function (event) {  
+	                console.log('Info: connection closed.');  
+	                console.log(event);  
+	            };	       
         }
-    );
-    $("#input${id}").change(function(){
-		option${id}.series[0].data[0].value = $(this).val();
-     	myChart${id}.setOption(option${id},true);
-	}); 
+    );//刷新仪表数据，使input 的hidden隐藏表单和echarts仪表的一致，有更好的方法请告诉我！
 </script>

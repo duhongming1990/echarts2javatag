@@ -29,7 +29,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </div>	
   <div>
 	<a href="LineDoubleNumDemo" target="_blank"><b style="color:red">高级折线：</b>双数值轴折线图NumLine</a><br/>
-	<img src="images/NumLine.png" width="300px" height="200px"/>
+	<img src="images/LineDoubleNum.png" width="600px" height="200px"/>
 	<img src="images/LineDoubleNumTag.png" width="300px" height="200px"/><br/>
   </div>
   <div>
@@ -39,22 +39,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </div>
   <div>
 	<a href="BarDemo" target="_blank">条形图Bar</a><br/>
-	<img src="images/Bar.png" width="300px" height="200px"/>
+	<img src="images/Bar.png" width="600px" height="200px"/>
 	<img src="images/BarTag.png" width="300px" height="200px"/><br/>
   </div>
   <div>
 	<a href="ReverseBarDemo" target="_blank">反转条形图Bar</a><br/>
-	<img src="images/ReverseBar.png" width="300px" height="200px"/>
+	<img src="images/ReverseBar.png" width="600px" height="200px"/>
 	<img src="images/ReverseBarTag.png" width="300px" height="200px"/><br/>
   </div>
    <div>
 	<a href="PieDemo" target="_blank">饼状图Pie</a><br/>
-	<img src="images/Pie.png" width="300px" height="200px"/>
+	<img src="images/Pie.png" width="600px" height="300px"/>
 	<img src="images/PieTag.png" width="300px" height="200px"/><br/>
   </div>
   <div>
 	<a href="RadarDemo" target="_blank">玫瑰图Radar</a><br/>
-	<img src="images/Radar.png" width="300px" height="200px"/>
+	<img src="images/Radar.png" width="600px" height="300px"/>
 	<img src="images/RadarTag.png" width="300px" height="200px"/><br/>
   </div>	
   /////////////////////////////////////////////////////////动态图表///////////////////////////////////////////////////
