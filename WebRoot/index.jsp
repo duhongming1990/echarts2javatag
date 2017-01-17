@@ -72,8 +72,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   /////////////////////////////////////////////////////////地图图表///////////////////////////////////////////////////
   <div>
 	<a href="map/china" target="_blank"><b style="color:red">中国地图</b></a><br/>
-	<img src="" width="600px" height="300px"/>
-	<img src="" width="600px" height="300px"/><br/>
+	<img src="images/ChinaMap.png" width="600px" height="300px"/>
+	<img src="images/ChinaMapTag.png" width="600px" height="300px"/><br/>
   </div>
   </body>
 </html>
