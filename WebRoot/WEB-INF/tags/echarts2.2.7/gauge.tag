@@ -61,7 +61,7 @@
 			    },
 			    series : [
 			        {
-			            name:'${id}',
+			            name:'${title}',
 			            type:'gauge',
 			            z: 3,
 			            min:0,

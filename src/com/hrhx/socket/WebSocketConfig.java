@@ -15,7 +15,12 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 public class WebSocketConfig extends WebMvcConfigurerAdapter implements WebSocketConfigurer{  
 	@Override  
 	    public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {  
-		 	registry.addHandler(systemWebSocketHandlerBF(),"/webSocket/data")
+		 	registry.addHandler(getGaugeData(),"/webSocket/gauge/data")
+	        .setAllowedOrigins("*")//这个异常是跨域引起的
+	        .addInterceptors(new SpringWebSocketHandlerInterceptor())
+	        .withSockJS();
+		 	
+		 	registry.addHandler(getLineData(),"/webSocket/line/data")
 	        .setAllowedOrigins("*")//这个异常是跨域引起的
 	        .addInterceptors(new SpringWebSocketHandlerInterceptor())
 	        .withSockJS();
@@ -28,8 +33,13 @@ public class WebSocketConfig extends WebMvcConfigurerAdapter implements WebSocke
 	                    .withSockJS();*/  
 	    } 
 	@Bean  
-	public WebSocketHandler systemWebSocketHandlerBF(){  
-	    return new PIWebAPIWebSocketBF();  
+	public WebSocketHandler getGaugeData(){  
+	    return new GaugeDataWebSocket();  
+	} 
+	
+	@Bean  
+	public WebSocketHandler getLineData(){  
+	    return new LineDataWebSocket();  
 	} 
 
 }

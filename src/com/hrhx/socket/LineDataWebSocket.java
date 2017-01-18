@@ -9,7 +9,7 @@ import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
   
-public class PIWebAPIWebSocketBF implements WebSocketHandler{
+public class LineDataWebSocket implements WebSocketHandler{
 	
     //private static final ArrayList<WebSocketSession> users = new ArrayList<WebSocketSession>();//这个会出现性能问题，最好用Map来存储，key用userid 
     private static CopyOnWriteArraySet<WebSocketSession> users = new CopyOnWriteArraySet<WebSocketSession>();

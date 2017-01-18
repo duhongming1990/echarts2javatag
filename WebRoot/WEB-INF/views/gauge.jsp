@@ -9,7 +9,7 @@
 			<td width="500px">
 				<ec:gauge   id="temperature1" 
 							height="360px" 
-							uri="/echarts2javatag/webSocket/data" 
+							uri="/echarts2javatag/webSocket/gauge/data" 
 							unitName="℃" 
 							title="全公司仪表温度" 
 							subtitle="仪表温度1号表" 
@@ -22,7 +22,7 @@
 			<td width="500px">
 				<ec:gauge   id="temperature2" 
 							height="360px" 
-							uri="/echarts2javatag/webSocket/data"  
+							uri="/echarts2javatag/webSocket/gauge/data"  
 							unitName="℃" 
 							title="全公司仪表温度" 
 							subtitle="仪表温度2号表" 
@@ -37,7 +37,7 @@
 			<td width="500px">
 				<ec:gauge   id="temperature3" 
 							height="360px" 
-							uri="/echarts2javatag/webSocket/data" 
+							uri="/echarts2javatag/webSocket/gauge/data" 
 							unitName="℃" 
 							title="全公司仪表温度" 
 							subtitle="仪表温度3号表" 
@@ -50,7 +50,7 @@
 			<td width="500px">
 				<ec:gauge   id="temperature4" 
 							height="360px" 
-							uri="/echarts2javatag/webSocket/data"  
+							uri="/echarts2javatag/webSocket/gauge/data"  
 							unitName="℃" 
 							title="全公司仪表温度" 
 							subtitle="仪表温度4号表" 
