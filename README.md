@@ -100,6 +100,8 @@ china_weather.7z >>>解压>>> 放到项目Src下面就行了！
 	
 
 **2 动态折线图Line的Tag:**
+![alt text](https://git.oschina.net/duhongming/echarts2javatag/raw/master/WebRoot/images/DynamicLine.png?dir=0&filepath=WebRoot%2Fimages%2FDynamicLine.png&oid=0150a9a7658695b7338dedc1f82639404be53ca2&sha=db1ac448ca7a608ad312c0f9243a90fb0d9ddb70 "动态折线图Line")
+
 ```xml
 	静态部分和以前一样：
 	var option =<echarts:dynamicLine
@@ -167,6 +169,7 @@ china_weather.7z >>>解压>>> 放到项目Src下面就行了！
 -----------------高级版-----------------
 
 **1 双数值轴折线图lineDoubleNum的Tag:**
+![alt text](https://git.oschina.net/duhongming/echarts2javatag/raw/master/WebRoot/images/LineDoubleNum.png?dir=0&filepath=WebRoot%2Fimages%2FLineDoubleNum.png&oid=d1492ce25c08203ab35a66d42d26c85a33ed1ba4&sha=db1ac448ca7a608ad312c0f9243a90fb0d9ddb70 "双数值轴折线图")
 ```xml
 	<div id="line_doubleNum"  class="main000"></div>
 	<echarts:lineDoubleNum 
@@ -184,6 +187,7 @@ china_weather.7z >>>解压>>> 放到项目Src下面就行了！
 	private Map<String,Double[][]> axisDataArr;
 	
 **2 搭配时间轴折线图lineTimeLine的Tag:**
+![alt text](https://git.oschina.net/duhongming/echarts2javatag/raw/master/WebRoot/images/LineTimeLine.png?dir=0&filepath=WebRoot%2Fimages%2FLineTimeLine.png&oid=f12643186ec069c72a8fbd9a5f89cf4fcf1169c3&sha=db1ac448ca7a608ad312c0f9243a90fb0d9ddb70 "搭配时间轴折线图lineTimeLine")
 ```xml
 	<div id="line_yAxisIndex"  class="main000"></div>
 	<echarts:lineTimeLine
@@ -218,6 +222,7 @@ china_weather.7z >>>解压>>> 放到项目Src下面就行了！
 	
 
 **3 反转条形图Bar的Tag:**
+![alt text](https://git.oschina.net/duhongming/echarts2javatag/raw/master/WebRoot/images/ReverseBar.png?dir=0&filepath=WebRoot%2Fimages%2FReverseBar.png&oid=75dfbc362519896c1b647e5b53e0439d7788c1db&sha=db1ac448ca7a608ad312c0f9243a90fb0d9ddb70 "反转条形图Bar的Tag")
 ```xml
 	<div id="line_yAxisIndex"  class="main000"></div>
 	<echarts:bar
@@ -248,6 +253,7 @@ china_weather.7z >>>解压>>> 放到项目Src下面就行了！
 -----------------基础版-----------------
 
 **1 直线Line的Tag:**
+![alt text](https://git.oschina.net/duhongming/echarts2javatag/blob/master/WebRoot/images/Line.png?dir=0&filepath=WebRoot%2Fimages%2FLine.png&oid=1488be660b0452897c0814c57f921b99320dc1bc&sha=db1ac448ca7a608ad312c0f9243a90fb0d9ddb70 "直线Line")
 ```xml
 	<div id="line_yAxisIndex"  class="main000"></div>
 	<echarts:line 
@@ -273,6 +279,7 @@ china_weather.7z >>>解压>>> 放到项目Src下面就行了！
 	Map<String,Integer> yAxisIndex;
 
 **2 柱状图Bar的Tag:**
+![alt text](https://git.oschina.net/duhongming/echarts2javatag/raw/master/WebRoot/images/Bar.png?dir=0&filepath=WebRoot%2Fimages%2FBar.png&oid=0d9e6485799a1cdf1630bc5ff548b8c8e7acd8bb&sha=db1ac448ca7a608ad312c0f9243a90fb0d9ddb70 "柱状图Bar")
 ```xml
    <div id="line_yAxisIndex"  class="main000"></div>
    <echarts:bar
@@ -298,6 +305,7 @@ china_weather.7z >>>解压>>> 放到项目Src下面就行了！
 	private Map<String,Integer> yAxisIndex;
 	
 **3 饼图Pie的Tag:**
+![alt text](https://git.oschina.net/duhongming/echarts2javatag/raw/master/WebRoot/images/Pie.png?dir=0&filepath=WebRoot%2Fimages%2FPie.png&oid=555f7b6fc608ca91073578f7cdb7aae46600b13c&sha=db1ac448ca7a608ad312c0f9243a90fb0d9ddb70 "饼图Pie")
 ```xml
    	<div id="pie"  class="main000"></div>
 	<echarts:pie
@@ -313,6 +321,7 @@ china_weather.7z >>>解压>>> 放到项目Src下面就行了！
 	private Map<String,Object> orientData;
 	
 **4 玫瑰图Radar的Tag:**
+![alt text](https://git.oschina.net/duhongming/echarts2javatag/raw/master/WebRoot/images/Radar.png?dir=0&filepath=WebRoot%2Fimages%2FRadar.png&oid=81a4df94f4f9232a06ff60d44c1747ac3843dfdb&sha=db1ac448ca7a608ad312c0f9243a90fb0d9ddb70 "玫瑰图Radar")
 ```xml
    <div id="radar16"  class="main000"></div>
 	<echarts:radar 
