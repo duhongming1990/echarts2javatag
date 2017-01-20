@@ -253,7 +253,7 @@ china_weather.7z >>>解压>>> 放到项目Src下面就行了！
 -----------------基础版-----------------
 
 **1 直线Line的Tag:**
-![alt text](https://git.oschina.net/duhongming/echarts2javatag/blob/master/WebRoot/images/Line.png?dir=0&filepath=WebRoot%2Fimages%2FLine.png&oid=1488be660b0452897c0814c57f921b99320dc1bc&sha=db1ac448ca7a608ad312c0f9243a90fb0d9ddb70 "直线Line")
+![alt text](https://git.oschina.net/duhongming/echarts2javatag/raw/master/WebRoot/images/Line.png?dir=0&filepath=WebRoot%2Fimages%2FLine.png&oid=1488be660b0452897c0814c57f921b99320dc1bc&sha=eee1be544518a345fd23337560186de083bfe98 "直线Line")
 ```xml
 	<div id="line_yAxisIndex"  class="main000"></div>
 	<echarts:line 
