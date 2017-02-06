@@ -7,7 +7,7 @@ import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
 
 public class Config {
-	private static final String databaseUrl ="jdbc:sqlite:china_weather.db";
+	private static final String databaseUrl ="jdbc:sqlite:chart.db";
 	public static ConnectionSource getConnectionSource(){
 		String rootClassPath = PathKit.getRootClassPath()+File.separator;
 		String[] databaseUrlArr = databaseUrl.split(":");

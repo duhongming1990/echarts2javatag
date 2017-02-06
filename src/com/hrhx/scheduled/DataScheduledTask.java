@@ -59,7 +59,7 @@ public class DataScheduledTask{
 		
 		String jsonStr = jsonUtil.toStrings(list);
 		getGaugeDataWebSocket().sendMessageToUsers(new TextMessage(jsonStr));
-		System.out.println("我是DataScheduledTask,getGaugeDataScheduledTask()正在发送后台推送数据："+jsonStr);
+		//System.out.println("我是DataScheduledTask,getGaugeDataScheduledTask()正在发送后台推送数据："+jsonStr);
 		
 	}
 	
@@ -78,7 +78,7 @@ public class DataScheduledTask{
 		SocketDataLine socketDataLine = new SocketDataLine(sdf.format(new Date()),random.nextDouble()*10,random.nextDouble()*10);
 		String jsonStr = jsonUtil.toStrings(socketDataLine);
 		getLineDataWebSocket().sendMessageToUsers(new TextMessage(jsonStr));
-		System.out.println("我是DataScheduledTask,getLineDataScheduledTask()正在发送后台推送数据："+jsonStr);
+		//System.out.println("我是DataScheduledTask,getLineDataScheduledTask()正在发送后台推送数据："+jsonStr);
 		
 	}
 
