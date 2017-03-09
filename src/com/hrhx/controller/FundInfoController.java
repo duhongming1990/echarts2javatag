@@ -15,9 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.hrhx.bean.ChinaWeatherDataBean;
 import com.hrhx.bean.FundAnalysisBean;
-import com.hrhx.dao.ChinaWeatherDataDao;
 import com.hrhx.dao.FundAnalysisDao;
 
 @Controller
@@ -100,17 +98,17 @@ public class FundInfoController {
 	
 	@RequestMapping(value="updateData")
 	public String updateData() throws IOException{
-		update1();
-		update2();
-		
+		updateFund("000198","天弘余额宝货币");
+		updateFund("000359","易方达易货币");
+		updateFund("000719","南方现金通货币E");
 		return "redirect:/fund/chart";
 	}
 	
-	private void update1(){
+	private void updateFund(String fundCode,String fundName){
 		//天弘余额宝货币(000198)
 		Document doc = null;
 		try {
-			doc = Jsoup.connect("http://fund.eastmoney.com/f10/F10DataApi.aspx?type=lsjz&code=000198&page=1&per=20000&sdate=&edate=&rt=0.07694074122676131").get();
+			doc = Jsoup.connect("http://fund.eastmoney.com/f10/F10DataApi.aspx?type=lsjz&code="+fundCode+"&page=1&per=20000&sdate=&edate=&rt=0.07694074122676131").get();
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -126,37 +124,7 @@ public class FundInfoController {
 			Double annualizedYield7 = Double.parseDouble(tds.get(2).html().replace("%", ""));
 			
 			FundAnalysisDao fundAnalysisDao= new FundAnalysisDao();
-			FundAnalysisBean fundAnalysisBean = new FundAnalysisBean("000198","天弘余额宝货币",everyThanAccrual,annualizedYield7,netValueDate);
-			try {
-				fundAnalysisDao.insert(fundAnalysisBean);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-	}
-	
-	private void update2(){
-		//易方达易货币(000359)
-		Document doc = null;
-		try {
-			doc = Jsoup.connect("http://fund.eastmoney.com/f10/F10DataApi.aspx?type=lsjz&code=000359&page=1&per=20000&sdate=&edate=&rt=0.07694074122676131").get();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		Elements trs = doc.select("table").select("tbody").select("tr");
-		for(int i=0;i<trs.size();i++){
-			
-			Element element = trs.get(i);
-			Elements tds = element.select("td");
-			
-			String netValueDate = tds.get(0).html().substring(0, 10);
-			Double everyThanAccrual = Double.parseDouble(tds.get(1).html());
-			Double annualizedYield7 = Double.parseDouble(tds.get(2).html().replace("%", ""));
-			
-			FundAnalysisDao fundAnalysisDao= new FundAnalysisDao();
-			FundAnalysisBean fundAnalysisBean = new FundAnalysisBean("000359","易方达易货币",everyThanAccrual,annualizedYield7,netValueDate);
+			FundAnalysisBean fundAnalysisBean = new FundAnalysisBean(fundCode,fundName,everyThanAccrual,annualizedYield7,netValueDate);
 			try {
 				fundAnalysisDao.insert(fundAnalysisBean);
 			} catch (SQLException e) {
