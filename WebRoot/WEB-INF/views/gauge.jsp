@@ -4,9 +4,7 @@
 		<%@ include file="/WEB-INF/views/include.inc.jsp"%>
 	</head>
 	<body>
-	<table>
-		<tr>
-			<td width="500px">
+
 				<ec:gauge   id="temperature1" 
 							height="360px" 
 							uri="/echarts2javatag/webSocket/gauge/data" 
@@ -18,8 +16,7 @@
 							axisLabelShow="true"
 							toFixed="0">
 				</ec:gauge>
-			</td>
-			<td width="500px">
+
 				<ec:gauge   id="temperature2" 
 							height="360px" 
 							uri="/echarts2javatag/webSocket/gauge/data"  
@@ -31,10 +28,7 @@
 							axisLabelShow="false"
 							toFixed="1">
 				</ec:gauge>
-			</td>
-		</tr>
-		<tr>
-			<td width="500px">
+
 				<ec:gauge   id="temperature3" 
 							height="360px" 
 							uri="/echarts2javatag/webSocket/gauge/data" 
@@ -46,8 +40,7 @@
 							axisLabelShow="true"
 							toFixed="2">
 				</ec:gauge>
-			</td>
-			<td width="500px">
+
 				<ec:gauge   id="temperature4" 
 							height="360px" 
 							uri="/echarts2javatag/webSocket/gauge/data"  
@@ -57,13 +50,8 @@
 							measureRange="10000" 
 							splitNumber="10"
 							axisLabelShow="false"
-							 toFixed="3">
+							toFixed="3">
 				</ec:gauge>
-			</td>
-		</tr>
-	</table>
-	
-	
-	
+
 	</body>
 </html>

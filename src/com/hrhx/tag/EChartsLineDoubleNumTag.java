@@ -8,6 +8,7 @@ import javax.servlet.jsp.tagext.BodyTag;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 import javax.servlet.jsp.tagext.Tag;
 
+import com.github.abel533.echarts.DataZoom;
 import com.github.abel533.echarts.axis.CategoryAxis;
 import com.github.abel533.echarts.axis.ValueAxis;
 import com.github.abel533.echarts.code.AxisType;
@@ -42,9 +43,7 @@ public class EChartsLineDoubleNumTag extends BodyTagSupport {
 	public int doEndTag() throws JspException {
 		StringBuffer sb = new StringBuffer();
 		sb.append("<script type='text/javascript'>");
-		sb.append("require([ 'echarts', 'echarts/chart/line'], function(ec) {");
-		sb.append("var myChart= ec.init(document.getElementById('" + id
-				+ "'));myChart.setTheme('macarons');");
+		sb.append("var myChart= echarts.init(document.getElementById('" + id+ "'),'macarons');");
 		// 创建GsonOption对象，即为json字符串
 		GsonOption option = new GsonOption();
 
@@ -76,8 +75,9 @@ public class EChartsLineDoubleNumTag extends BodyTagSupport {
 				// Tool.restore,
 				Tool.saveAsImage);
 		option.calculable(true);
-		option.dataZoom().show(true).realtime(true).start(0).end(100);
-
+		DataZoom dataZoom = new DataZoom();
+		dataZoom.show(true).realtime(true).start(0).end(100);
+		option.dataZoom(dataZoom);
 		/**
 		 * xAxis : [ { type: 'value' } ]
 		 */
@@ -116,7 +116,6 @@ public class EChartsLineDoubleNumTag extends BodyTagSupport {
 		}
 		sb.append("var option="+option.toString()+";");
 		sb.append("myChart.setOption(option);");
-		sb.append("});");
 		sb.append("</script>");
 		try {
 			this.pageContext.getOut().write(sb.toString());

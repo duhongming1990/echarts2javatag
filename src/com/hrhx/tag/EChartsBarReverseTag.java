@@ -40,8 +40,7 @@ public class EChartsBarReverseTag extends BodyTagSupport {
 	public int doEndTag() throws JspException {
 		StringBuffer sb = new StringBuffer();
 		sb.append("<script type='text/javascript'>");
-		sb.append("require([ 'echarts', 'echarts/chart/bar'], function(ec) {");
-		sb.append("var myChart= ec.init(document.getElementById('" + id+ "'));myChart.setTheme('macarons');");
+		sb.append("var myChart= echarts.init(document.getElementById('" + id+ "'),'macarons');");
 		// 创建GsonOption对象，即为json字符串
 		GsonOption option = new GsonOption();
 		option.tooltip().trigger(Trigger.axis);
@@ -88,7 +87,6 @@ public class EChartsBarReverseTag extends BodyTagSupport {
 		}
 		sb.append("var option=" + option.toString() + ";");
 		sb.append("myChart.setOption(option);");
-		sb.append("});");
 		sb.append("</script>");
 		try {
 			this.pageContext.getOut().write(sb.toString());

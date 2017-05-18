@@ -9,6 +9,7 @@ import javax.servlet.jsp.tagext.BodyTag;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 import javax.servlet.jsp.tagext.Tag;
 
+import com.github.abel533.echarts.DataZoom;
 import com.github.abel533.echarts.axis.CategoryAxis;
 import com.github.abel533.echarts.axis.ValueAxis;
 import com.github.abel533.echarts.code.AxisType;
@@ -43,8 +44,8 @@ public class EChartsLineTag extends BodyTagSupport {
 	public int doEndTag() throws JspException {
 		StringBuffer sb = new StringBuffer();
 		sb.append("<script type='text/javascript'>");
-		sb.append("require([ 'echarts', 'echarts/chart/line','echarts/chart/bar','echarts/chart/map'], function(ec) {");
-		sb.append("var myChart= ec.init(document.getElementById('"+id+"'));myChart.setTheme('macarons');");
+		//sb.append("require([ 'echarts', 'echarts/chart/line','echarts/chart/bar','echarts/chart/map'], function(ec) {");
+		sb.append("var myChart= echarts.init(document.getElementById('"+id+"'),'macarons');");
 		// 创建GsonOption对象，即为json字符串
 		GsonOption option = new GsonOption();
 		option.tooltip().trigger(Trigger.axis);
@@ -57,8 +58,10 @@ public class EChartsLineTag extends BodyTagSupport {
 				new MagicType(Magic.line, Magic.bar),
 				Tool.dataZoom, Tool.restore);
 		option.calculable(true);
-		option.dataZoom().show(true).realtime(true).start(0).end(100);
 
+		DataZoom dataZoom = new DataZoom();
+		dataZoom.show(true).realtime(true).start(0).end(100);
+		option.dataZoom(dataZoom);
 		// X轴数据封装并解析
 		ValueAxis valueAxis = new ValueAxis();
 		for (String s : xAxisData) {
@@ -102,7 +105,7 @@ public class EChartsLineTag extends BodyTagSupport {
 		}
 		sb.append("var option="+option.toString()+";");
 		sb.append("myChart.setOption(option);");
-		sb.append("});");
+//		sb.append("});");
 		sb.append("</script>");
 		try {
 			this.pageContext.getOut().write(sb.toString());

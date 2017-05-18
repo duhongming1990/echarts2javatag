@@ -9,6 +9,7 @@ import javax.servlet.jsp.tagext.BodyTag;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 import javax.servlet.jsp.tagext.Tag;
 
+import com.github.abel533.echarts.DataZoom;
 import com.github.abel533.echarts.axis.CategoryAxis;
 import com.github.abel533.echarts.axis.ValueAxis;
 import com.github.abel533.echarts.code.AxisType;
@@ -51,8 +52,10 @@ public class EChartsDynamicLineTag extends BodyTagSupport {
 				// new MagicType(Magic.line, Magic.bar,Magic.stack,Magic.tiled),
 				Tool.dataZoom, Tool.restore);
 		option.calculable(true);
-		option.dataZoom().show(true).realtime(true).start(0).end(100);
-
+		
+		DataZoom dataZoom = new DataZoom();
+		dataZoom.show(true).realtime(true).start(0).end(100);
+		option.dataZoom(dataZoom);
 		// X轴数据封装并解析
 		ValueAxis valueAxis = new ValueAxis();
 		for (String s : xAxisData) {

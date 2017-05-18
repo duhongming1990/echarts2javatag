@@ -38,8 +38,7 @@ public class EChartsPieTag extends BodyTagSupport {
 	public int doEndTag() throws JspException {
 		StringBuffer sb = new StringBuffer();
 		sb.append("<script type='text/javascript'>");
-		sb.append("require([ 'echarts', 'echarts/chart/pie','echarts/chart/funnel'], function(ec) {");
-		sb.append("var myChart= ec.init(document.getElementById('" + id+ "'));myChart.setTheme('macarons');");
+		sb.append("var myChart= echarts.init(document.getElementById('" + id+ "'),'macarons');");
 		// 创建GsonOption对象，即为json字符串
 		GsonOption option = new GsonOption();
 		option.tooltip().trigger(Trigger.item).formatter("{a} <br/>{b} : {c} ({d}%)");
@@ -85,7 +84,6 @@ public class EChartsPieTag extends BodyTagSupport {
 		}
 		sb.append("var option=" + option.toString() + ";");
 		sb.append("myChart.setOption(option);");
-		sb.append("});");
 		sb.append("</script>");
 		try {
 			this.pageContext.getOut().write(sb.toString());

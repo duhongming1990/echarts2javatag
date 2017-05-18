@@ -2,8 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%@ taglib uri="http://java.sun.com/jsp/hrhx/echarts2.2.7" prefix="echarts"%>
-<%@ taglib prefix="ec" tagdir="/WEB-INF/tags/echarts2.2.7" %>
+<%@ taglib uri="http://java.sun.com/jsp/hrhx/echarts3.5.4" prefix="echarts"%>
+<%@ taglib prefix="ec" tagdir="/WEB-INF/tags/echarts3.5.4" %>
 <%
 	String basePath = request.getContextPath();
 %>
@@ -38,12 +38,6 @@
 <script type="text/javascript" src="<%=basePath%>/styles/sockjs-client-master/dist/sockjs-1.1.1.min.js"></script>
 
 <!-- ECharts单文件引入 -->
-<script src="<%=basePath%>/styles/echarts-2.2.7/build/dist/echarts.js"></script>
-<script type="text/javascript">
-	// 路径配置
-	require.config({
-		paths : {
-			echarts : '<%=basePath%>/styles/echarts-2.2.7/build/dist'
-		} 
-	});
-</script>
+<script src="<%=basePath%>/styles/echarts-3.5.4/echarts.min.js"></script>
+<script src="<%=basePath%>/styles/echarts-3.5.4/theme/macarons.js"></script>
+

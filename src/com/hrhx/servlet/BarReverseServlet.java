@@ -11,6 +11,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.github.abel533.echarts.code.Magic;
+import com.github.abel533.echarts.code.Orient;
+import com.github.abel533.echarts.code.SeriesType;
+import com.github.abel533.echarts.code.Tool;
+import com.github.abel533.echarts.code.Trigger;
+import com.github.abel533.echarts.code.X;
+import com.github.abel533.echarts.code.Y;
+import com.github.abel533.echarts.data.Data;
+import com.github.abel533.echarts.feature.MagicType;
+import com.github.abel533.echarts.feature.MagicType.Option;
+import com.github.abel533.echarts.json.GsonOption;
+import com.github.abel533.echarts.series.Funnel;
+import com.github.abel533.echarts.series.Line;
 @WebServlet(name = "BarReverseServlet", urlPatterns = { "/ReverseBarDemo" }, loadOnStartup = 1)
 public class BarReverseServlet extends HttpServlet {
 	private static final long serialVersionUID = -6886697421555222670L;
@@ -77,6 +91,69 @@ public class BarReverseServlet extends HttpServlet {
 		return yAxisIndex;
 	}
 	
-	
+	public String getStr(String id,String title,String subtitle,Map<String,Object> orientData,Boolean itemStyleShow){
+		// 创建GsonOption对象，即为json字符串
+		GsonOption option = new GsonOption();
+		option.tooltip().trigger(Trigger.item).formatter("{a} <br/>{b} : {c} ({d}%)");
+		option.title(title, subtitle);
+		// 工具栏
+		Option o = new Option();
+		Funnel funnel = new Funnel().x("25%").width("50%").funnelAlign(X.left).max(1548);
+		o.setFunnel(funnel);
+		
+		MagicType magicType = new MagicType(Magic.funnel,Magic.pie);
+		magicType.setOption(o);
+		
+		option.toolbox().show(true).feature(
+			// Tool.dataView,
+			Tool.saveAsImage,
+			magicType
+				);
+		option.calculable(true);
+		
+		// 数据轴封装并解析
+		for(String xdata : orientData.keySet()) {
+			//option.legend().orient(Orient.horizontal).x(X.left).y(Y.bottom).data(xdata);
+			option.legend().orient(Orient.vertical).x(X.left).y(Y.center).data(xdata);
+		}
+		
+		if (orientData != null) {
+			Line line = new Line();
+			//饼图数值显示
+			if(itemStyleShow){
+				line.itemStyle().normal().label()
+											.show(itemStyleShow)
+											.formatter("{b} : {c}");
+			}
+			
+			line.name(title).type(SeriesType.pie);
+			for (String title_ : orientData.keySet()) {
+				Object value = orientData.get(title_);		
+				Data data = new Data().name(title_);
+				data.value(value);
+				line.data(data);				
+			}
+			option.series(line);
+		}
+		return option.toString();
+	}
+//	<div id="" class="main"></div>
+//	<script type="text/javascript">
+//		var myChart;
+//	    // 使用
+//	    require(
+//	        [
+//	            'echarts',
+//	            'echarts/chart/pie' // 使用仪表盘就加载gauge模块，按需加载
+//	        ],
+//	        function (ec) {
+//	            // 基于准备好的dom，初始化echarts图表
+//	            myChart = ec.init(document.getElementById('')); 
+//				var option = {};
+//				myChart.setOption(option);
+//	        }
+//	    );
+//	</script>
+//	myChart.setOption(option,true);
 
 }
