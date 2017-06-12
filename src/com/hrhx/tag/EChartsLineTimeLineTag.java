@@ -57,7 +57,7 @@ public class EChartsLineTimeLineTag extends BodyTagSupport {
 		 * autoPlay : true, playInterval : 1000 },
 		 */
 		option.timeline().autoPlay(true).playInterval(1000).label()
-				.formatter("function(s){return s.slice(0, 4);}");
+				.formatter("function(s){return (new Date(s)).getFullYear();}");
 		for (String key : timelineData) {
 			option.timeline().data(key);
 		}

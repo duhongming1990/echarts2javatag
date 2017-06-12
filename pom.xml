@@ -20,7 +20,7 @@
 		<!-- 必须包：Echarts图表依赖包开始 -->
 		<dependency>
 			<groupId>com.github.abel533</groupId>
-			<artifactId>ECharts</artifactId>
+			<artifactId>dhm-echarts-bean</artifactId>
 			<version>3.0.0.2</version>
 		</dependency>
 		<dependency>
